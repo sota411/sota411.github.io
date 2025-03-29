@@ -154,10 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .attr('r', d => d.r)
         .style('opacity', () => random() * 0.3);
 
-    // 詳細情報ウィンドウを作成
-    const detailWindow = container.append('div')
-        .attr('class', 'event-detail');
-
     // 時間のスケールを設定（全体の期間）
     const allDates = timelineData.flatMap(person => [person.birth, person.death]);
     const minYear = Math.floor(Math.min(...allDates) / 10) * 10;
@@ -180,9 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return d3.scaleLinear()
                      .domain([yourTimeline.birth, yourTimeline.death])
                      .range([
-                        //ここでオフセット調整を行う(Haraguchi Sotaのタイムラインの位置を調節)
+                         // ここでオフセット調整を行う(Haraguchi Sotaのタイムラインの位置を調節)
                          dummyTimeScale(yourTimeline.birth) + offsetAdjustment - 500,
-                         dummyTimeScale(yourTimeline.birth) + offsetAdjustment - 500+ sotaFixedLength
+                         dummyTimeScale(yourTimeline.birth) + offsetAdjustment - 500 + sotaFixedLength
                      ]);
         } else {
             return d3.scaleLinear()
@@ -213,12 +209,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Haraguchi Sotaの位置を取得
     const yourX = personScale("Haraguchi Sota");
 
-    // 連結線を最初に作成
-    const connectorLine = mainGroup.append('path')
-        .attr('class', 'connector-line')
-        .attr('d', '')
-        .style('opacity', 0);
-
     // パーティクル用のデフ
     const particleDefs = svg.append('defs');
     // 輝きフィルター
@@ -235,159 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .attr('in', 'SourceGraphic')
         .attr('in2', 'blur')
         .attr('operator', 'over');
-
-    // イベント詳細表示中かどうかのフラグ
-    let currentEvent = null;
-
-    // イベントハンドラー関数を分離
-    function handleEventMouseEnter(event, d) {
-        currentEvent = this;
-        const transform = d3.zoomTransform(svg.node());
-        const circle = d3.select(this);
-        const currentRadius = +circle.attr('data-base-radius') / transform.k;
-        circle.transition()
-            .duration(500)
-            .attr('r', 15 / transform.k)
-            .style('filter', 'url(#glow)');
-        const bbox = this.getBBox();
-        const eventX = parseFloat(d3.select(this.parentNode).attr('transform').split('(')[1].split(',')[0]);
-        const eventY = parseFloat(d3.select(this.parentNode).attr('transform').split(',')[1].split(')')[0]);
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        const detailWidth = 500;
-        const detailHeight = 200;
-        let detailX = (eventX * transform.k) + transform.x + (width * 0.1);
-        let detailY = (eventY * transform.k) + transform.y - 100;
-        if (detailX + detailWidth > windowWidth - 40) {
-            detailX = windowWidth - detailWidth - 40;
-        }
-        if (detailX < 20) {
-            detailX = 20;
-        }
-        if (detailY < 20) {
-            detailY = 20;
-        }
-        if (detailY + detailHeight > windowHeight - 40) {
-            detailY = windowHeight - detailHeight - 40;
-        }
-        const lineData = `M${(eventX * transform.k) + transform.x},${(eventY * transform.k) + transform.y} 
-                          C${(eventX * transform.k) + transform.x + 100},${(eventY * transform.k) + transform.y} 
-                          ${detailX - 50},${detailY + 100} 
-                          ${detailX},${detailY + 100}`;
-        animateConnectorLine(lineData);
-        animateParticles(lineData);
-        showDetailWindow(d, detailX, detailY);
-    }
-
-    function animateConnectorLine(lineData) {
-        connectorLine
-            .attr('d', lineData)
-            .style('opacity', 0)
-            .style('stroke-dasharray', function() {
-                return this.getTotalLength() + ' ' + this.getTotalLength();
-            })
-            .style('stroke-dashoffset', function() {
-                return this.getTotalLength();
-            })
-            .transition()
-            .duration(1000)
-            .style('opacity', 0.8)
-            .style('stroke-dashoffset', 0);
-    }
-
-    function animateParticles(lineData) {
-        const numParticles = 25;
-        const particles = Array.from({ length: numParticles }, (_, i) => ({
-            id: i,
-            delay: i * 40,
-            speed: 0.8 + Math.random() * 0.4
-        }));
-        mainGroup.selectAll('.particle').remove();
-        mainGroup.selectAll('.particle')
-            .data(particles)
-            .enter()
-            .append('circle')
-            .attr('class', 'particle')
-            .attr('r', () => Math.random() * 3 + 1)
-            .style('fill', () => cosmicColors[Math.floor(Math.random() * cosmicColors.length)])
-            .style('filter', 'url(#glow)')
-            .each(function(d) {
-                animateParticle(d3.select(this), d, connectorLine.node().getTotalLength());
-            });
-    }
-
-    function animateParticle(particle, data, lineLength) {
-        particle
-            .style('opacity', 0)
-            .transition()
-            .delay(data.delay)
-            .duration(2000 / data.speed)
-            .ease(d3.easeLinear)
-            .tween('pathTween', function() {
-                return function(t) {
-                    const point = connectorLine.node().getPointAtLength(t * lineLength);
-                    particle
-                        .attr('cx', point.x)
-                        .attr('cy', point.y)
-                        .style('opacity', t < 0.9 ? 0.8 : 0.8 - (t - 0.9) * 8);
-                };
-            })
-            .on('end', function() {
-                if (Math.random() < 0.5) {
-                    d3.select(this)
-                        .transition()
-                        .duration(1000)
-                        .style('opacity', 0)
-                        .remove();
-                } else {
-                    d3.select(this).remove();
-                }
-            });
-    }
-
-    function showDetailWindow(data, x, y) {
-        detailWindow
-            .style('opacity', 0)
-            .html(`
-                <div class="event-detail-title">${data.title}</div>
-                <div class="event-detail-date">${data.date}</div>
-                <div class="event-detail-description">${data.description}</div>
-            `)
-            .style('left', `${x}px`)
-            .style('top', `${y}px`)
-            .style('border-color', data.color)
-            .classed('visible', true)
-            .transition()
-            .duration(600)
-            .style('opacity', 1);
-    }
-
-    function handleEventMouseLeave() {
-        if (this !== currentEvent) return;
-        const transform = d3.zoomTransform(svg.node());
-        const circle = d3.select(this);
-        const baseRadius = +circle.attr('data-base-radius');
-        circle.transition()
-            .duration(500)
-            .attr('r', baseRadius / transform.k)
-            .style('filter', null);
-        connectorLine.transition()
-            .duration(800)
-            .style('opacity', 0);
-        mainGroup.selectAll('.particle')
-            .transition()
-            .duration(500)
-            .style('opacity', 0)
-            .remove();
-        detailWindow
-            .transition()
-            .duration(600)
-            .style('opacity', 0)
-            .on('end', function() {
-                d3.select(this).classed('visible', false);
-            });
-        currentEvent = null;
-    }
 
     // タイムラインを描画
     timelineData.forEach((person, i) => {
@@ -432,10 +269,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     .attr('data-base-radius', baseRadius);
             })
             .attr('fill', d => d.color)
-            .style('opacity', d => person.person === "Haraguchi Sota" ? 1 : 0.3)
-            .on('mouseenter', handleEventMouseEnter)
-            .on('mouseleave', handleEventMouseLeave);
+            .style('opacity', d => person.person === "Haraguchi Sota" ? 1 : 0.3);
+
         if (person.person === "Haraguchi Sota") {
+            // Haraguchi Sotaのイベントにラベルを追加
             events.append('text')
                 .attr('class', 'event-label')
                 .attr('x', 15)
@@ -467,34 +304,18 @@ document.addEventListener('DOMContentLoaded', () => {
         )
         .scale(finalScale);
     const zoom = d3.zoom()
-        .scaleExtent([0.8, 4])
+        .scaleExtent([1, 1]) // ユーザーによるズームを無効化
         .translateExtent([
             [yourX - width * 0.2, -height],
             [yourX + width * 0.6, height * 2]
         ])
         .on('zoom', (event) => {
             const transform = event.transform;
+            // 水平方向の移動を固定
             const fixedX = width * 0.1 - yourX * transform.k;
             transform.x = fixedX;
             mainGroup.attr('transform', transform);
-            if (currentEvent) {
-                const circle = d3.select(currentEvent);
-                const baseRadius = +circle.attr('data-base-radius');
-                circle.transition()
-                    .duration(300)
-                    .attr('r', baseRadius / transform.k)
-                    .style('filter', null);
-                connectorLine.style('opacity', 0);
-                mainGroup.selectAll('.particle').remove();
-                detailWindow
-                    .transition()
-                    .duration(300)
-                    .style('opacity', 0)
-                    .on('end', function() {
-                        d3.select(this).classed('visible', false);
-                    });
-                currentEvent = null;
-            }
+            
             mainGroup.selectAll('.event-circle')
                 .attr('r', function() {
                     const baseRadius = +this.getAttribute('data-base-radius');
@@ -503,14 +324,21 @@ document.addEventListener('DOMContentLoaded', () => {
             mainGroup.selectAll('.event-label, .event-year')
                 .style('font-size', `${12 / transform.k}px`);
         });
-    svg.call(zoom);
+    // ユーザーによるズームを無効化し、ホイールイベントを無効化
+    svg.call(zoom).on("wheel.zoom", null);
+    // ページ全体のスクロールを許可
+    window.addEventListener('wheel', (event) => {
+        if (!event.ctrlKey) {
+            window.scrollBy(0, event.deltaY);
+        }
+    });
     
     svg.transition()
         .duration(2000)
         .ease(d3.easeCubicInOut)
         .call(zoom.transform, initialTransform)
         .on('end', () => {
-            mainGroup.selectAll('.portfolio-title, .portfolio-subtitle, .scroll-hint')
+            mainGroup.selectAll('.portfolio-title, .portfolio-subtitle')
                 .transition()
                 .duration(1000)
                 .style('opacity', 1);
@@ -542,3 +370,4 @@ document.addEventListener('DOMContentLoaded', () => {
         .style('opacity', 0)
         .text('Technical School Student');
 });
+
