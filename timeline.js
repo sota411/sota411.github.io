@@ -209,6 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Haraguchi Sotaの位置を取得
     const yourX = personScale("Haraguchi Sota");
 
+    // 連結線を最初に作成
+    const connectorLine = mainGroup.append('path')
+        .attr('class', 'connector-line')
+        .attr('d', '')
+        .style('opacity', 0);
+
     // パーティクル用のデフ
     const particleDefs = svg.append('defs');
     // 輝きフィルター
@@ -338,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .ease(d3.easeCubicInOut)
         .call(zoom.transform, initialTransform)
         .on('end', () => {
-            mainGroup.selectAll('.portfolio-title, .portfolio-subtitle')
+            mainGroup.selectAll('.portfolio-title, .portfolio-subtitle, .scroll-hint')
                 .transition()
                 .duration(1000)
                 .style('opacity', 1);
@@ -370,4 +376,3 @@ document.addEventListener('DOMContentLoaded', () => {
         .style('opacity', 0)
         .text('Technical School Student');
 });
-
