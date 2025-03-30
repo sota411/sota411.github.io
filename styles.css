@@ -68,56 +68,6 @@ body {
     transition: all 0.3s ease;
 }
 
-/* 詳細情報ウィンドウの強化スタイル */
-.event-detail {
-    position: fixed;
-    background: #ffffff;
-    border-radius: 6px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-    padding: 15px 20px;
-    min-width: 240px;
-    max-width: 350px;
-    z-index: 1000;
-    opacity: 0;
-    transform: scale(1) translateY(0);
-    transition: all 0.5s ease;
-    pointer-events: none;
-    margin: 20px;
-    color: #000;
-}
-
-.event-detail.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.event-detail-title {
-    font-size: 1.7em;
-    font-weight: bold;
-    margin-bottom: 10px;
-    position: relative;
-    /* 色はインラインスタイルで設定 */
-}
-
-.event-detail-date {
-    font-size: 0.9em;
-    color: #666;
-    margin-bottom: 10px;
-    font-weight: 400;
-}
-
-.event-detail-description {
-    font-size: 0.95em;
-    line-height: 1.5;
-    color: #333;
-}
-
-/* 連結線のスタイル */
-.connector-line {
-    stroke-dasharray: 2, 2;
-    stroke-opacity: 0.5;
-}
-
 /* パーティクルエフェクトの強化 */
 .particle {
     fill: #fff;
@@ -181,4 +131,55 @@ body {
 
 .reset-button:hover {
     background: rgba(255, 255, 255, 0.2) !important;
-} 
+}
+
+/* ▼ ここから修正 ▼
+   - 二重ボックスをなくし、シンプルに「.timeline-details」だけで
+   - 背景は不要。左の線のみ引く
+*/
+.timeline-details {
+    position: absolute;
+    /* 背景色・枠などを削除し、左の線のみ残す */
+    border-left: 4px solid #3B82F6; /* 左側の青線 */
+    padding-left: 1rem;
+    display: none;
+    z-index: 1000;
+    max-width: 400px; /* 適宜調整 */
+    /* 背景を消すなら、以下のように transparent 指定など */
+    background: transparent;
+    /* 文字色がダーク背景だと見にくい場合は調整してください */
+    color: #fff;
+}
+
+/* .timeline-item は使わないので削除（またはコメントアウト）してOK
+.timeline-item {
+    ...
+}
+*/
+
+/* ▼ 見出しやテキストの色などを補足調整（参考） */
+.company-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #3B82F6;
+    margin: 0;
+}
+
+.company-url {
+    color: #3B82F6;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.company-url:hover {
+    text-decoration: underline;
+}
+
+.description {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    /* 左線のみ残す都合で背景色消すなら、色は白にしておく */
+    color: #fff;
+    opacity: 0.9;
+}
