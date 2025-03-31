@@ -1162,3 +1162,151 @@ footer {
         justify-content: center;
     }
 }
+
+/* Internship Section */
+.internship {
+    background-color: var(--bg-color);
+}
+
+.internship-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.internship-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    padding: 25px;
+}
+
+.internship-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.internship-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.company-logo {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.company-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.company-info {
+    flex: 1;
+}
+
+.company-info h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--primary-text);
+}
+
+.internship-date {
+    font-size: 1rem;
+    color: var(--accent-color-1);
+    margin-bottom: 5px;
+}
+
+.company-website a {
+    color: var(--link-color);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.company-website a:hover {
+    color: var(--hover-color);
+}
+
+.internship-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.internship-description p {
+    color: var(--secondary-text);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.internship-tech h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--primary-text);
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-tags span {
+    background-color: rgba(100, 181, 246, 0.15);
+    color: var(--accent-color-1);
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(100, 181, 246, 0.3);
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .internship-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .company-logo {
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .internship-card {
+        padding: 15px;
+    }
+    
+    .tech-tags {
+        gap: 8px;
+    }
+    
+    .tech-tags span {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+    
+    .company-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .internship-date {
+        font-size: 0.9rem;
+    }
+}
+
+/* Projects section */

@@ -158,6 +158,17 @@ window.addEventListener('load', () => {
     });
     
     animateOnScroll();
+    
+    // インターンシップセクションのアニメーション
+    const internshipCard = document.querySelector('.internship-card');
+    if (internshipCard) {
+        internshipCard.style.opacity = '0';
+        internshipCard.style.transform = 'translateY(50px)';
+        setTimeout(() => {
+            internshipCard.style.opacity = '1';
+            internshipCard.style.transform = 'translateY(0)';
+        }, 300);
+    }
 });
 
 // スクロール時のアニメーション実行
