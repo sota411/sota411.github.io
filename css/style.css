@@ -1,4 +1,4 @@
-/* Base styles */
+/* サイト全体のカラーテーマ */
 :root {
     --bg-color: #121212;
     --primary-text: #E0E0E0;
@@ -17,6 +17,7 @@
     --error-color: #F44336;
 }
 
+/* 基本スタイル */
 * {
     margin: 0;
     padding: 0;
@@ -35,6 +36,7 @@ body {
     overflow-x: hidden;
 }
 
+/* 共通のリンクスタイル */
 a {
     text-decoration: none;
     color: var(--link-color);
@@ -45,11 +47,13 @@ a:hover {
     color: var(--hover-color);
 }
 
+/* レスポンシブ画像 */
 img {
     max-width: 100%;
     height: auto;
 }
 
+/* コンテナの基本設定 */
 .container {
     width: 90%;
     max-width: 1200px;
@@ -61,6 +65,7 @@ section {
     padding: 100px 0;
 }
 
+/* セクションタイトルのスタイル */
 .section-title {
     font-size: 2.5rem;
     text-align: center;
@@ -86,7 +91,7 @@ button {
     outline: none;
 }
 
-/* Header & Navigation */
+/* ヘッダーとナビゲーション */
 header {
     height: 100vh;
     background: 
@@ -118,6 +123,7 @@ header::before {
     opacity: 0.3;
 }
 
+/* ナビゲーションバーの固定表示 */
 .nav-container {
     display: flex;
     justify-content: space-between;
@@ -130,6 +136,7 @@ header::before {
     transition: all 0.3s ease;
 }
 
+/* スクロール時のナビゲーションバーの背景変更 */
 .nav-container.scrolled {
     background-color: rgba(0, 0, 0, 0.9);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -143,6 +150,7 @@ header::before {
     letter-spacing: 1px;
 }
 
+/* ナビゲーションリンク */
 .nav-links {
     display: flex;
     list-style: none;
@@ -159,6 +167,7 @@ header::before {
     padding: 5px 0;
 }
 
+/* ナビゲーションリンクのホバーエフェクト */
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -174,6 +183,7 @@ header::before {
     width: 100%;
 }
 
+/* ハンバーガーメニュー(レスポンシブ) */
 .burger {
     display: none;
     cursor: pointer;
@@ -187,7 +197,7 @@ header::before {
     transition: all 0.3s ease;
 }
 
-/* Hero Section */
+/* ヒーローセクション */
 .hero {
     flex: 1;
     display: flex;
@@ -277,7 +287,7 @@ header::before {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Glitch Effect */
+/* グリッチエフェクト */
 .glitch {
     position: relative;
     color: var(--primary-text);
@@ -348,7 +358,7 @@ header::before {
     }
 }
 
-/* About Section */
+/* アバウトセクション */
 .about-content {
     display: flex;
     align-items: center;
@@ -357,19 +367,21 @@ header::before {
 
 .about-image {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .about-text {
     flex: 1;
 }
 
+/* プロフィール画像のアニメーション */
 .image-container {
     position: relative;
     width: 300px;
     height: 300px;
-    margin: 0 auto;
     border-radius: 50%;
-    /* overflow: hidden; を削除 */
     box-shadow: var(--box-shadow);
 }
 
@@ -381,7 +393,6 @@ header::before {
     transition: 0.5s;
     animation: rotate 4s linear infinite;
     border-radius: 50%;
-    /* レイヤーを上げる */
     z-index: 2;
 }
 
@@ -391,28 +402,22 @@ header::before {
     inset: 5px;
     background: var(--card-bg);
     border-radius: 50%;
-    /* レイヤーを追加 */
     z-index: 1;
 }
 
 .image-container img {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    inset: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
     object-fit: cover;
-    /* 円形クリップを実現 */
     border-radius: 50%;
-    /* 最前面にする */
     z-index: 3;
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .about-text h3 {
@@ -470,7 +475,7 @@ header::before {
     transform: translateY(-5px);
 }
 
-/* Skills Section */
+/* スキルセクション */
 .skill-categories {
     display: flex;
     flex-direction: column;
@@ -530,7 +535,7 @@ header::before {
     transition: width 1.5s ease-in-out;
 }
 
-/* Projects Section */
+/* プロジェクトセクション */
 .project-filters {
     display: flex;
     justify-content: center;
@@ -558,6 +563,7 @@ header::before {
     gap: 30px;
 }
 
+/* プロジェクトカード */
 .project-card {
     background-color: var(--card-bg);
     border-radius: 10px;
@@ -626,7 +632,13 @@ header::before {
     font-size: 1.2rem;
 }
 
-/* Contact Section */
+.project-links a.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* コンタクトセクション */
 .contact-content {
     display: flex;
     gap: 50px;
@@ -758,7 +770,7 @@ header::before {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Footer */
+/* フッター */
 footer {
     background-color: #0a0a0a;
     padding: 50px 0 20px;
@@ -844,7 +856,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Responsive Design */
+/* レスポンシブデザイン */
 @media screen and (max-width: 992px) {
     section {
         padding: 80px 0;
@@ -860,8 +872,20 @@ footer {
         width: 100%;
     }
     
+    .image-container {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto 30px;
+    }
+    
     .info-item {
-        justify-content: center;
+        justify-content: flex-start;
+        text-align: left;
+        padding: 0 20px;
+    }
+    
+    .info-title {
+        min-width: 120px;
     }
     
     .social-links {
@@ -873,11 +897,13 @@ footer {
     }
 }
 
+/* タブレット以下のデバイス用 */
 @media screen and (max-width: 768px) {
     body {
         font-size: 14px;
     }
     
+    /* モバイルナビゲーション */
     .nav-links {
         position: absolute;
         right: 0;
@@ -887,7 +913,7 @@ footer {
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
-        width: 50%;
+        width: 100%;
         transform: translateX(100%);
         transition: transform 0.3s ease-in;
         z-index: 999;
@@ -897,8 +923,18 @@ footer {
         transform: translateX(0);
     }
     
+    .nav-links li {
+        margin: 15px 0;
+    }
+    
     .burger {
         display: block;
+        z-index: 1000;
+    }
+    
+    /* グリッドレイアウトの調整 */
+    .projects-grid, .skills-grid {
+        grid-template-columns: 1fr;
     }
     
     .section-title {
@@ -909,13 +945,13 @@ footer {
         font-size: 2.5rem;
     }
     
+    .typing-wrapper {
+        font-size: 1.2rem;
+    }
+    
     .cta-buttons {
         flex-direction: column;
         gap: 15px;
-    }
-    
-    .projects-grid, .skills-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
     
     .footer-content {
@@ -931,15 +967,21 @@ footer {
     .contact-social {
         width: 100%;
     }
+    
+    .project-img {
+        height: 180px;
+    }
 }
 
+/* スマートフォン用 */
 @media screen and (max-width: 576px) {
     .section-title {
         font-size: 1.8rem;
     }
     
     .hero h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
     }
     
     .about-text h3 {
@@ -947,12 +989,8 @@ footer {
     }
     
     .image-container {
-        width: 250px;
-        height: 250px;
-    }
-    
-    .nav-links {
-        width: 70%;
+        width: 200px;
+        height: 200px;
     }
     
     .project-filters {
@@ -965,12 +1003,40 @@ footer {
     }
     
     .info-item {
-        flex-direction: column;
-        gap: 5px;
+        flex-direction: row;
+        gap: 0;
+        padding: 0 15px;
+    }
+    
+    .info-title {
+        min-width: 100px;
+    }
+    
+    .personal-info {
+        margin: 20px 0;
+    }
+    
+    .project-tech {
+        flex-wrap: wrap;
+    }
+    
+    .project-tech span {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+    
+    .contact-map {
+        height: 250px;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
     }
 }
 
-/* Animation Classes */
+/* アニメーションクラス */
 .fade-in {
     opacity: 0;
     transform: translateY(50px);
@@ -982,7 +1048,7 @@ footer {
     transform: translateY(0);
 }
 
-/* Burger Menu Animation */
+/* ハンバーガーメニューのアニメーション */
 .toggle .line1 {
     transform: rotate(-45deg) translate(-5px, 6px);
 }
@@ -995,7 +1061,7 @@ footer {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Certifications Section */
+/* 資格セクション */
 .certifications {
     padding: 80px 0;
     background-color: var(--bg-color-alt);
@@ -1096,3 +1162,151 @@ footer {
         justify-content: center;
     }
 }
+
+/* Internship Section */
+.internship {
+    background-color: var(--bg-color);
+}
+
+.internship-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.internship-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    padding: 25px;
+}
+
+.internship-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.internship-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.company-logo {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.company-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.company-info {
+    flex: 1;
+}
+
+.company-info h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--primary-text);
+}
+
+.internship-date {
+    font-size: 1rem;
+    color: var(--accent-color-1);
+    margin-bottom: 5px;
+}
+
+.company-website a {
+    color: var(--link-color);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.company-website a:hover {
+    color: var(--hover-color);
+}
+
+.internship-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.internship-description p {
+    color: var(--secondary-text);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.internship-tech h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--primary-text);
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-tags span {
+    background-color: rgba(100, 181, 246, 0.15);
+    color: var(--accent-color-1);
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(100, 181, 246, 0.3);
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .internship-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .company-logo {
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .internship-card {
+        padding: 15px;
+    }
+    
+    .tech-tags {
+        gap: 8px;
+    }
+    
+    .tech-tags span {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+    
+    .company-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .internship-date {
+        font-size: 0.9rem;
+    }
+}
+
+/* Projects section */
