@@ -2,9 +2,21 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="sota411のポートフォリオサイトです。スキル、プロジェクト、経歴などを紹介しています。">
+    <meta name="keywords" content="sota411, ポートフォリオ, Web開発, プログラミング, Python, JavaScript">
+    <meta name="author" content="sota411">
+    <meta name="theme-color" content="#121212">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="sota411 Portfolio">
+    <meta property="og:description" content="sota411のポートフォリオサイトです。スキル、プロジェクト、経歴などを紹介しています。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sota411.github.io/">
+    <meta property="og:image" content="img/profile.jpg">
     <title>sota411 Portfolio</title>
     <link rel="icon" type="image/jpeg" href="img/profile.jpg">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,10 +24,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-outer-ring"></div>
+        </div>
+    </div>
+
     <header id="home">
+        <div id="tsparticles"></div> <!-- Particle container -->
         <div class="nav-container">
-            <div class="logo">sota411</div>
-            <nav>
+            <div class="logo" data-aos="fade-down" data-aos-delay="100">sota411</div>
+            <nav data-aos="fade-down" data-aos-delay="200">
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -33,12 +53,12 @@
             </div>
         </div>
         <div class="hero">
-            <h1 class="glitch" data-text="sota411 Portfolio">sota411 Portfolio</h1>
-            <div class="typing-wrapper">
+            <h1 class="glitch" data-text="sota411 Portfolio" data-aos="fade-up" data-aos-delay="300">sota411 Portfolio</h1>
+            <div class="typing-wrapper" data-aos="fade-up" data-aos-delay="400">
                 <span class="typing-container"></span>
                 <div class="typing-cursor"></div>
             </div>
-            <div class="cta-buttons">
+            <div class="cta-buttons" data-aos="fade-up" data-aos-delay="500">
                 <a href="#projects" class="cta-primary">View Projects</a>
                 <a href="#contact" class="cta-secondary">Contact Me</a>
             </div>
@@ -48,14 +68,15 @@
     <main>
         <section id="about" class="about">
             <div class="container">
-                <h2 class="section-title">About Me</h2>
+                <h2 class="section-title" data-aos="fade-up">About Me</h2>
                 <div class="about-content">
-                    <div class="about-image">
+                    <div class="about-image" data-aos="fade-right" data-aos-delay="100">
                         <div class="image-container">
-                            <img src="img/profile.jpg" alt="Profile Image">
+                            <!-- 遅延読み込みを実装 -->
+                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/profile.jpg" alt="Profile Image" loading="lazy">
                         </div>
                     </div>
-                    <div class="about-text">
+                    <div class="about-text" data-aos="fade-left" data-aos-delay="200">
                         <h3>Sota Haraguchi</h3>
                         <p>2006年生まれ。主にバックエンド側の開発を行っており、最先端のAI技術を学習・活用して画期的なサービスを作りたいと考えています。</p>
                         <p>新しい技術を学ぶことが大好きで、現在はフロントエンドの開発とAIに関する研究、インターンシップに熱中しています。</p>
@@ -74,8 +95,8 @@
                             </div>
                         </div>
                         <div class="social-links">
-                            <a href="https://github.com/sota411" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="https://x.com/Sota_411" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="https://github.com/sota411" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                            <a href="https://x.com/Sota_411" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
                             <a href="mailto:sikre04@gmail.com"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
@@ -85,9 +106,9 @@
 
         <section id="certifications" class="certifications">
             <div class="container">
-                <h2 class="section-title">Certifications & Achievements</h2>
-                <div class="certifications-container">
-                    <div class="certification-item">
+                <h2 class="section-title" data-aos="fade-up">Certifications & Achievements</h2>
+                <div class="certifications-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="certification-item" data-aos="fade-up" data-aos-delay="200">
                         <div class="certification-icon">
                             <i class="fas fa-award"></i>
                         </div>
@@ -96,7 +117,7 @@
                             <p>情報処理推進機構(IPA)</p>
                         </div>
                     </div>
-                    <div class="certification-item">
+                    <div class="certification-item" data-aos="fade-up" data-aos-delay="300">
                         <div class="certification-icon">
                             <i class="fas fa-pen-fancy"></i>
                         </div>
@@ -105,7 +126,7 @@
                             <p>日本書人連盟</p>
                         </div>
                     </div>
-                    <div class="certification-item">
+                    <div class="certification-item" data-aos="fade-up" data-aos-delay="400">
                         <div class="certification-icon">
                             <i class="fas fa-paint-brush"></i>
                         </div>
@@ -114,7 +135,7 @@
                             <p>日本書人連盟</p>
                         </div>
                     </div>
-                    <div class="certification-item">
+                    <div class="certification-item" data-aos="fade-up" data-aos-delay="500">
                         <div class="certification-icon">
                             <i class="fas fa-table"></i>
                         </div>
@@ -123,7 +144,7 @@
                             <p>日本情報処理検定協会</p>
                         </div>
                     </div>
-                    <div class="certification-item">
+                    <div class="certification-item" data-aos="fade-up" data-aos-delay="600">
                         <div class="certification-icon">
                             <i class="fas fa-trophy"></i>
                         </div>
@@ -138,54 +159,54 @@
 
         <section id="skills" class="skills">
             <div class="container">
-                <h2 class="section-title">Skills</h2>
+                <h2 class="section-title" data-aos="fade-up">Skills</h2>
                 <div class="skill-categories">
-                    <div class="skill-category">
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
                         <h3>Programming Languages</h3>
                         <div class="skills-grid">
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
                                 <div class="skill-icon"><i class="fab fa-python"></i></div>
                                 <h4>Python</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 90%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="300">
                                 <div class="skill-icon"><i class="fab fa-js"></i></div>
                                 <h4>JavaScript</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 65%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="400">
                                 <div class="skill-icon"><i class="fab fa-html5"></i></div>
                                 <h4>HTML</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 65%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="500">
                                 <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
                                 <h4>CSS</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 65%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="600">
                                 <div class="skill-icon"><i class="fas fa-code"></i></div>
                                 <h4>TypeScript</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 60%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="700">
                                 <div class="skill-icon"><i class="fab fa-windows"></i></div>
                                 <h4>C#</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 30%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="800">
                                 <div class="skill-icon"><i class="fas fa-gem"></i></div>
                                 <h4>Ruby</h4>
                                 <div class="skill-bar">
@@ -195,45 +216,45 @@
                         </div>
                     </div>
                     
-                    <div class="skill-category">
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="150">
                         <h3>Cloud & Infrastructure</h3>
                         <div class="skills-grid">
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="250">
                                 <div class="skill-icon"><i class="fab fa-aws"></i></div>
                                 <h4>AWS Lambda</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 75%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="350">
                                 <div class="skill-icon"><i class="fab fa-aws"></i></div>
                                 <h4>AWS EC2</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 70%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="450">
                                 <div class="skill-icon"><i class="fab fa-aws"></i></div>
                                 <h4>AWS S3</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 70%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="550">
                                 <div class="skill-icon"><i class="fab fa-aws"></i></div>
                                 <h4>AWS DynamoDB</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 60%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="650">
                                 <div class="skill-icon"><i class="fab fa-aws"></i></div>
                                 <h4>AWS GameLift</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 50%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="750">
                                 <div class="skill-icon"><i class="fab fa-linux"></i></div>
                                 <h4>Linux</h4>
                                 <div class="skill-bar">
@@ -243,31 +264,31 @@
                         </div>
                     </div>
 
-                    <div class="skill-category">
+                    <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
                         <h3>Tools & Others</h3>
                         <div class="skills-grid">
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="300">
                                 <div class="skill-icon"><i class="fas fa-file-word"></i></div>
                                 <h4>Office365</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 90%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="400">
                                 <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
                                 <h4>Git</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 60%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="500">
                                 <div class="skill-icon"><i class="fab fa-unity"></i></div>
                                 <h4>Unity</h4>
                                 <div class="skill-bar">
                                     <div class="skill-progress" style="width: 25%"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-aos="fade-up" data-aos-delay="600">
                                 <div class="skill-icon"><i class="fas fa-database"></i></div>
                                 <h4>SQL</h4>
                                 <div class="skill-bar">
@@ -282,17 +303,17 @@
 
         <section id="internship" class="internship" style="background-color: #121212;">
             <div class="container">
-                <h2 class="section-title">Internship Experience</h2>
-                <div class="internship-content">
-                    <div class="internship-card" style="background-color: #1E1E1E; border-radius: 10px; padding: 25px; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);">
+                <h2 class="section-title" data-aos="fade-up">Internship Experience</h2>
+                <div class="internship-content" data-aos="fade-up" data-aos-delay="100">
+                    <div class="internship-card" style="background-color: #1E1E1E; border-radius: 10px; padding: 25px; border: 1px solid #333; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);" data-aos="zoom-in" data-aos-delay="200">
                         <div class="internship-header">
                             <div class="company-logo" style="width: 80px; height: 80px; background-color: #fff; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 5px; border: 1px solid #333;">
-                                <img src="img/qia.png" alt="qia Co., Ltd. Logo" style="max-width: 90%; max-height: 90%; object-fit: contain;">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/qia.png" alt="qia Co., Ltd. Logo" style="max-width: 90%; max-height: 90%; object-fit: contain;" loading="lazy">
                             </div>
                             <div class="company-info">
                                 <h3>qia株式会社</h3>
                                 <p class="internship-date">2024.12 - Present</p>
-                                <p class="company-website"><a href="https://qia.co.jp" target="_blank">qia.co.jp</a></p>
+                                <p class="company-website"><a href="https://qia.co.jp" target="_blank" rel="noopener">qia.co.jp</a></p>
                             </div>
                         </div>
                         <div class="internship-details">
@@ -317,17 +338,17 @@
 
         <section id="projects" class="projects">
             <div class="container">
-                <h2 class="section-title">Projects</h2>
-                <div class="project-filters">
+                <h2 class="section-title" data-aos="fade-up">Projects</h2>
+                <div class="project-filters" data-aos="fade-up" data-aos-delay="100">
                     <button class="filter-btn active" data-filter="all">All</button>
                     <button class="filter-btn" data-filter="web">Web</button>
                     <button class="filter-btn" data-filter="app">App</button>
                     <button class="filter-btn" data-filter="design">Design</button>
                 </div>
                 <div class="projects-grid">
-                    <div class="project-card" data-category="web">
+                    <div class="project-card" data-category="web" data-aos="fade-up" data-aos-delay="200">
                         <div class="project-img">
-                            <img src="img/Project1.png" alt="Project 1">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/Project1.png" alt="Project 1" loading="lazy">
                         </div>
                         <div class="project-content">
                             <h3>P&D 軽減率bot</h3>
@@ -338,14 +359,14 @@
                                 <span>Google spreadsheets</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://line.me/R/ti/p/%40682idpxa" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="https://github.com/sota411/P-D-Reduction-rate" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="https://line.me/R/ti/p/%40682idpxa" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/sota411/P-D-Reduction-rate" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="project-card" data-category="design">
+                    <div class="project-card" data-category="design" data-aos="fade-up" data-aos-delay="300">
                         <div class="project-img">
-                            <img src="img/project2.jpg" alt="Project 3" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/project2.jpg" alt="Project 3" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                         </div>
                         <div class="project-content">
                             <h3>Valorant DB</h3>
@@ -356,14 +377,14 @@
                                 <span>Discord Developers</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://discordapp.com/oauth2/authorize?client_id=1305187513199099934" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="https://github.com/sota411/valodb" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="https://discordapp.com/oauth2/authorize?client_id=1305187513199099934" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/sota411/valodb" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="project-card" data-category="web">
+                    <div class="project-card" data-category="web" data-aos="fade-up" data-aos-delay="400">
                         <div class="project-img">
-                            <img src="img/project3.jpg" alt="Project 4" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/project3.jpg" alt="Project 4" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                         </div>
                         <div class="project-content">
                             <h3>MAC Address Changer</h3>
@@ -372,7 +393,7 @@
                                 <span>Python</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/sota411/denpaninngenn_adb" target="_blank"><i class="fab fa-github"></i></a>
+                                <a href="https://github.com/sota411/denpaninngenn_adb" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                     </div>
@@ -382,9 +403,9 @@
 
         <section id="contact" class="contact">
             <div class="container">
-                <h2 class="section-title">Contact</h2>
+                <h2 class="section-title" data-aos="fade-up">Contact</h2>
                 <div class="contact-content">
-                    <div class="contact-info">
+                    <div class="contact-info" data-aos="fade-right" data-aos-delay="100">
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <i class="fas fa-envelope"></i>
@@ -409,7 +430,7 @@
                             </div>
                             <div class="contact-details">
                                 <h3>Twitter</h3>
-                                <p><a href="https://x.com/Sota_411" target="_blank">@Sota_411</a></p>
+                                <p><a href="https://x.com/Sota_411" target="_blank" rel="noopener">@Sota_411</a></p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -418,17 +439,17 @@
                             </div>
                             <div class="contact-details">
                                 <h3>Instagram</h3>
-                                <p><a href="https://www.instagram.com/sinktoaf/" target="_blank">@sinktoaf</a></p>
+                                <p><a href="https://www.instagram.com/sinktoaf/" target="_blank" rel="noopener">@sinktoaf</a></p>
                             </div>
                         </div>
                         <div class="social-links contact-social-links">
-                            <a href="https://github.com/sota411" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="https://x.com/Sota_411" target="_blank"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.instagram.com/sinktoaf/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://github.com/sota411" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                            <a href="https://x.com/Sota_411" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/sinktoaf/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
                             <a href="mailto:sikre04@gmail.com"><i class="fas fa-envelope"></i></a>
                         </div>
                     </div>
-                    <div class="contact-map">
+                    <div class="contact-map" data-aos="fade-left" data-aos-delay="200">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51889.03842570586!2d139.2795085!3d35.6585805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60191e0dca7d2887%3A0x51d2ef3d60f89d0d!2sHachioji%2C%20Tokyo!5e0!3m2!1sen!2sjp!4v1710400000000!5m2!1sen!2sjp" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
@@ -458,10 +479,10 @@
                 <div class="footer-social">
                     <h4>Social Media</h4>
                     <div class="social-icons">
-                        <a href="https://github.com/sota411" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://x.com/Sota_411" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/sota411" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                        <a href="https://x.com/Sota_411" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
                         <a href="mailto:sikre04@gmail.com"><i class="fas fa-envelope"></i></a>
-                        <a href="https://www.instagram.com/sinktoaf/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/sinktoaf/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
@@ -471,6 +492,10 @@
         </div>
     </footer>
 
+    <!-- tsParticles -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html> 
