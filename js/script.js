@@ -278,6 +278,11 @@ if (heroTitle && heroText && false) { // デフォルトで無効、有効にす
 
 // Custom Cursor Implementation
 const createCustomCursor = () => {
+    // モバイルデバイスまたはタッチデバイスの場合はカスタムカーソルを無効にする
+    if (window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        return;
+    }
+
     const cursor = document.createElement('div');
     cursor.classList.add('custom-cursor');
     document.body.appendChild(cursor);
@@ -288,7 +293,7 @@ const createCustomCursor = () => {
 
     let mouseX = 0, mouseY = 0;
     let cursorX = 0, cursorY = 0;
-    let speed = 0.1; // Smoothing factor
+    let speed = 0.2; // Smoothing factor - 追従速度を改善
 
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -328,6 +333,15 @@ const createCustomCursor = () => {
         element.addEventListener('mouseleave', () => {
             cursor.classList.remove('hover');
         });
+    });
+
+    // ウィンドウリサイズ時の処理
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+        } else {
+            cursor.style.display = 'flex';
+        }
     });
 };
 
