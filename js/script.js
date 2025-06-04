@@ -134,7 +134,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Resize イベントの処理
+// リサイズイベントの処理
 window.addEventListener('resize', () => {
     // ウィンドウサイズが変更されたときにモバイルメニューを閉じる
     if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
@@ -247,7 +247,7 @@ window.addEventListener('load', () => {
             imageObserver.observe(img);
         });
     } else {
-        // Fallback for browsers that don't support IntersectionObserver
+        // IntersectionObserverがサポートされていないブラウザ用のフォールバック
         lazyImages.forEach(img => {
             img.src = img.getAttribute('data-src');
             img.removeAttribute('data-src');
@@ -276,91 +276,6 @@ if (heroTitle && heroText && false) { // デフォルトで無効、有効にす
     typeWriter();
 }
 
-// Custom Cursor Implementation
-const createCustomCursor = () => {
-    // モバイルデバイスまたはタッチデバイスの場合はカスタムカーソルを無効にする
-    if (window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        return;
-    }
-
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
-
-    const cursorDot = document.createElement('div'); // Inner dot for better visibility/style
-    cursorDot.classList.add('custom-cursor-dot');
-    cursor.appendChild(cursorDot);
-
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-    let speed = 0.2; // Smoothing factor - 追従速度を改善
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-        let distX = mouseX - cursorX;
-        let distY = mouseY - cursorY;
-
-        cursorX += distX * speed;
-        cursorY += distY * speed;
-
-        cursor.style.left = `${cursorX}px`;
-        cursor.style.top = `${cursorY}px`;
-
-        requestAnimationFrame(animateCursor);
-    }
-
-    requestAnimationFrame(animateCursor);
-
-    document.addEventListener('mousedown', () => {
-        cursor.classList.add('clicked');
-    });
-
-    document.addEventListener('mouseup', () => {
-        cursor.classList.remove('clicked');
-    });
-
-    const hoverElements = document.querySelectorAll(
-        'a, button, .project-card, .skill-item, .filter-btn, .burger, input[type="submit"], .social-links a, .theme-toggle' // Added more specific hover targets
-    );
-    hoverElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            cursor.classList.add('hover');
-        });
-        element.addEventListener('mouseleave', () => {
-            cursor.classList.remove('hover');
-        });
-    });
-
-    // ウィンドウリサイズ時の処理
-    window.addEventListener('resize', () => {
-        if (window.innerWidth <= 768) {
-            cursor.style.display = 'none';
-        } else {
-            cursor.style.display = 'flex';
-        }
-    });
-};
-
-const createThemeToggle = () => {
-    const themeToggle = document.createElement('div');
-    themeToggle.classList.add('theme-toggle');
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    document.body.appendChild(themeToggle);
-    
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
-        if (document.body.classList.contains('light-theme')) {
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        } else {
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        }
-    });
-};
-
 document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.nav-container');
     const navMenuLinks = document.querySelectorAll('.nav-links li');
@@ -372,22 +287,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectCards = document.querySelectorAll('.project-card');
     const preloader = document.getElementById('preloader');
 
-    // Initialize Custom Cursor
-    createCustomCursor();
-
-    // Initialize Theme Toggle (if applicable)
-    // createThemeToggle();
-
-    // Preloader fade out
+    // プリローダーのフェードアウト
     window.addEventListener('load', () => {
-        setTimeout(() => { // Add a small delay for smoother transition
-            if (preloader) { // Check if preloader exists
+        setTimeout(() => { // スムーズな遷移のための遅延
+            if (preloader) { // プリローダーが存在するかチェック
                 preloader.classList.add('hidden');
             }
-        }, 100); // Reduced delay from 500ms to 100ms
+        }, 100); // 500msから100msに短縮
     });
 
-    // AOS Initialization
+    // AOS（Animate On Scroll）の初期化
     AOS.init({
         duration: 800,
         easing: 'ease-in-out',
@@ -397,14 +306,14 @@ document.addEventListener('DOMContentLoaded', () => {
         offset: 50
     });
 
-    // tsParticles Initialization
+    // tsParticles の初期化
     tsParticles.load('tsparticles', {
         fpsLimit: 120,
         interactivity: {
             events: {
                 onHover: {
                     enable: true,
-                    mode: 'grab' // Changed mode to grab for interaction
+                    mode: 'grab' // インタラクション用にgrabモードに変更
                 },
                 onClick: {
                     enable: true,
@@ -440,17 +349,17 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         particles: {
             number: {
-                value: 80, // Adjusted particle count
+                value: 80, // パーティクル数を調整
                 density: {
                     enable: true,
                     value_area: 800
                 }
             },
             color: {
-                value: '#ffffff' // Particle color
+                value: '#ffffff' // パーティクルの色
             },
             shape: {
-                type: 'circle', // Particle shape
+                type: 'circle', // パーティクルの形状
             },
             opacity: {
                 value: 0.5,
@@ -478,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             move: {
                 enable: true,
-                speed: 2, // Slower particle speed
+                speed: 2, // パーティクルの移動速度を遅く
                 direction: 'none',
                 random: false,
                 straight: false,
@@ -492,30 +401,30 @@ document.addEventListener('DOMContentLoaded', () => {
         detectRetina: true,
     });
 
-    // Sticky Navigation & Scrollspy Logic
+    // スティッキーナビゲーション & スクロールスパイの実装
     let lastScrollTop = 0;
-    const sections = document.querySelectorAll('main section'); // Select all main sections
+    const sections = document.querySelectorAll('main section'); // メインセクションを全て選択
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Navbar background change on scroll
+        // スクロール時のナビバー背景変更
         if (scrollTop > 50) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
 
-        // Scrollspy: Highlight active nav link
+        // スクロールスパイ: アクティブなナビリンクをハイライト
         let currentSection = '';
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - nav.offsetHeight - 100; // Adjusted offset
+            const sectionTop = section.offsetTop - nav.offsetHeight - 100; // オフセットを調整
             const sectionHeight = section.offsetHeight;
             if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
                 currentSection = section.getAttribute('id');
             }
         });
 
-        // If no section is active (e.g., at the top or bottom out of section range), default to home
+        // セクションがアクティブでない場合（例：トップやボトムでセクション範囲外）、ホームをデフォルトに
         if (!currentSection && scrollTop < sections[0].offsetTop - nav.offsetHeight - 100) {
             currentSection = 'home';
         }
@@ -528,10 +437,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // モバイルやネガティブスクロール用
     });
 
-    // Smooth scrolling for anchor links
+    // アンカーリンク用のスムーズスクロール
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -539,14 +448,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                const offsetTop = targetElement.offsetTop - nav.offsetHeight + 1; // Adjust for fixed nav
+                const offsetTop = targetElement.offsetTop - nav.offsetHeight + 1; // 固定ナビ用の調整
 
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
                 });
 
-                // Close mobile nav if open
+                // モバイルナビが開いている場合は閉じる
                 if (navMenu.classList.contains('active')) {
                     navMenu.classList.remove('active');
                     burger.classList.remove('toggle');
@@ -555,19 +464,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Mobile Navigation Toggle
+    // モバイルナビゲーションのトグル
     if (burger && navMenu) {
         burger.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             burger.classList.toggle('toggle');
 
-            // Animate Links - Target list items within the navMenu
+            // リンクのアニメーション - navMenu内のリストアイテムをターゲット
             const menuItems = navMenu.querySelectorAll('li'); 
             menuItems.forEach((item, index) => {
-                // Clear any existing animation before setting new one
+                // 新しいアニメーションを設定する前に既存のアニメーションをクリア
                 item.style.animation = '';
                 
-                // Apply animation with delay after a small timeout to ensure CSS transition works
+                // CSS遷移が動作するように、少し遅延してからアニメーションを適用
                 setTimeout(() => {
                     if (navMenu.classList.contains('active')) {
                         item.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
@@ -579,35 +488,224 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Project Filtering
+    // プロジェクトフィルタリング
     projectFilters.forEach(button => {
         button.addEventListener('click', () => {
-            // Remove active class from all buttons
+            // 全てのボタンからactiveクラスを削除
             projectFilters.forEach(btn => btn.classList.remove('active'));
-            // Add active class to the clicked button
+            // クリックされたボタンにactiveクラスを追加
             button.classList.add('active');
 
             const filter = button.getAttribute('data-filter');
 
             projectCards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                const cardContainer = card.parentElement; // Get the grid item container if needed
+                const cardContainer = card.parentElement; // 必要に応じてグリッドアイテムコンテナを取得
 
-                // Reset AOS animation state before filtering
+                // フィルタリング前にAOSアニメーション状態をリセット
                 card.classList.remove('aos-animate');
 
                 if (filter === 'all' || category === filter) {
                     card.style.display = 'block';
-                    // Re-apply AOS class after a short delay to trigger animation
+                    // アニメーションをトリガーするために短い遅延後にAOSクラスを再適用
                     setTimeout(() => card.classList.add('aos-animate'), 50);
                 } else {
                     card.style.display = 'none';
                 }
             });
 
-            // Refresh AOS to recalculate positions after filtering (optional, might cause flicker)
+            // フィルタリング後のAOS位置再計算（オプション、ちらつきの原因になる可能性あり）
             // AOS.refresh();
         });
     });
 
+});
+
+// アクティビティ読み込み機能
+class ActivityLoader {
+    constructor() {
+        this.summaryElement = document.getElementById('summaryContent');
+        this.lastUpdatedElement = document.getElementById('lastUpdated');
+        this.tweetCountElement = document.getElementById('tweetCount');
+        this.topicCountElement = document.getElementById('topicCount');
+        this.engagementRateElement = document.getElementById('engagementRate');
+        
+        this.init();
+    }
+
+    async init() {
+        try {
+            await this.loadActivity();
+            // 5分ごとに更新をチェック
+            setInterval(() => this.loadActivity(), 5 * 60 * 1000);
+        } catch (error) {
+            console.error('アクティビティ初期化エラー:', error);
+            this.showError();
+        }
+    }
+
+    async loadActivity() {
+        try {
+            // GitHub Pages環境でもローカル環境でも静的ファイルから読み込み
+            // const isGitHubPages = window.location.hostname === 'sota411.github.io' || 
+            //                      window.location.hostname.includes('github.io') ||
+            //                      !window.location.hostname.includes('localhost');
+            
+            let response;
+            // if (isGitHubPages) {
+            //     // 静的ファイルから読み込み
+            //     response = await fetch('./data/activity.json');
+            // } else {
+            //     // ローカル環境ではAPIから読み込み
+            //     response = await fetch('/api/activity');
+            // }
+            response = await fetch('./data/activity.json'); // 常に静的ファイルから読み込む
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            this.updateUI(data);
+            
+        } catch (error) {
+            console.error('アクティビティ読み込みエラー:', error);
+            this.showError();
+        }
+    }
+
+    updateUI(data) {
+        // 要約テキストの更新
+        if (this.summaryElement) {
+            this.summaryElement.innerHTML = this.formatSummary(data.summary);
+            this.summaryElement.classList.add('updated');
+            
+            // アニメーション後にクラスを削除
+            setTimeout(() => {
+                this.summaryElement.classList.remove('updated');
+            }, 600);
+        }
+
+        // 最終更新時刻の更新
+        if (this.lastUpdatedElement && data.lastUpdated) {
+            const updatedDate = new Date(data.lastUpdated);
+            this.lastUpdatedElement.textContent = 
+                `最終更新: ${updatedDate.toLocaleDateString('ja-JP')} ${updatedDate.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}`;
+        }
+
+        // 統計データの更新
+        if (data.stats) {
+            this.updateStats(data.stats);
+        }
+
+        // ハイライトの表示（もしあれば）
+        if (data.highlights && data.highlights.length > 0) {
+            this.showHighlights(data.highlights);
+        }
+    }
+
+    updateStats(stats) {
+        if (this.tweetCountElement) {
+            this.animateNumber(this.tweetCountElement, stats.tweetCount || 0);
+        }
+
+        if (this.topicCountElement) {
+            this.animateNumber(this.topicCountElement, stats.topicCount || 0);
+        }
+
+        if (this.engagementRateElement) {
+            this.animateNumber(this.engagementRateElement, stats.engagementRate || 0, '%');
+        }
+    }
+
+    animateNumber(element, targetValue, suffix = '') {
+        const startValue = parseInt(element.textContent) || 0;
+        const duration = 1000; // 1秒
+        const startTime = performance.now();
+
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // イージング関数（easeOutCubic）
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.round(startValue + (targetValue - startValue) * easeOut);
+            
+            element.textContent = currentValue + suffix;
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+
+        requestAnimationFrame(animate);
+    }
+
+    formatSummary(summary) {
+        if (!summary) return '<p class="loading-message">アクティビティを読み込み中...</p>';
+        
+        // 文章を段落に分割
+        const paragraphs = summary.split('\n').filter(p => p.trim().length > 0);
+        return paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
+    }
+
+    showHighlights(highlights) {
+        // ハイライトを表示する要素があれば追加
+        const summaryContent = this.summaryElement;
+        if (summaryContent && highlights.length > 0) {
+            const highlightsHtml = `
+                <div class="activity-highlights">
+                    <h4>主な活動</h4>
+                    <ul>
+                        ${highlights.map(highlight => `<li>${highlight}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            // 既存のハイライトを削除
+            const existingHighlights = summaryContent.querySelector('.activity-highlights');
+            if (existingHighlights) {
+                existingHighlights.remove();
+            }
+            
+            summaryContent.insertAdjacentHTML('beforeend', highlightsHtml);
+        }
+    }
+
+    showError() {
+        if (this.summaryElement) {
+            this.summaryElement.innerHTML = `
+                <p class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    アクティビティデータの読み込みに失敗しました。しばらく後に再試行されます。
+                </p>
+            `;
+        }
+
+        if (this.lastUpdatedElement) {
+            this.lastUpdatedElement.textContent = '最終更新: エラー';
+        }
+
+        // 統計値をリセット
+        [this.tweetCountElement, this.topicCountElement, this.engagementRateElement].forEach(el => {
+            if (el) el.textContent = '--';
+        });
+    }
+}
+
+// DOMが読み込まれたらアクティビティローダーを初期化
+document.addEventListener('DOMContentLoaded', () => {
+    // 既存の初期化処理を維持
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    }
+
+    // アクティビティローダーを初期化
+    if (document.getElementById('summaryContent')) {
+        new ActivityLoader();
+    }
 });

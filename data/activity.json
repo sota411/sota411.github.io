@@ -1,0 +1,48 @@
+{
+  "summary": "過去15日間で継続的な技術学習とプロジェクト開発に取り組んでいます。特にWebアプリケーション開発、AI技術の習得、インターンシップでの実務経験に重点を置いた活動を行っています。プログラミングスキルの向上と新しい技術領域への挑戦を続けています。",
+  "highlights": [
+    "React/JavaScript での開発スキル向上",
+    "AWS インフラストラクチャーの学習と実践",
+    "CTF大会優勝などセキュリティ分野での成果",
+    "AI・機械学習関連の資格取得と技術習得",
+    "ポートフォリオサイトの継続的な改善"
+  ],
+  "topics": [
+    "開発",
+    "学習",
+    "AI・機械学習",
+    "インターン",
+    "セキュリティ"
+  ],
+  "stats": {
+    "tweetCount": 6,
+    "topicCount": 5,
+    "engagementRate": 75
+  },
+  "rawTweets": [
+    {
+      "id": "1",
+      "text": "今日はReactの新しいコンポーネントを実装しました！状態管理がかなりスムーズになって満足です。#React #JavaScript #開発",
+      "created_at": "2024-12-19T10:30:00.000Z",
+      "metrics": {
+        "like_count": 5,
+        "retweet_count": 2,
+        "reply_count": 1
+      },
+      "context": []
+    },
+    {
+      "id": "2",
+      "text": "インターンでAWSのデプロイについて学んでいます。クラウドインフラの奥深さを実感中... #AWS #インターン #学習",
+      "created_at": "2024-12-17T14:20:00.000Z",
+      "metrics": {
+        "like_count": 8,
+        "retweet_count": 3,
+        "reply_count": 2
+      },
+      "context": []
+    }
+  ],
+  "lastUpdated": "2024-12-20T10:30:00.000Z",
+  "generatedBy": "Initial Setup"
+}

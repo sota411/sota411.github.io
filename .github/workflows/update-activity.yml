@@ -1,0 +1,45 @@
+name: Update Portfolio Activity
+
+on:
+  schedule:
+    # 15日ごとの午前8時 JST (前日の23時 UTC)
+    - cron: '0 23 */15 * *'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  update-activity:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Create data directory
+      run: mkdir -p data
+    
+    - name: Update activity data
+      env:
+        X_API_BEARER_TOKEN: ${{ secrets.X_API_BEARER_TOKEN }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: node scripts/updateActivity.js
+    
+    - name: Commit and push if changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/activity.json
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🤖 Auto-update activity data - $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
+        fi 
