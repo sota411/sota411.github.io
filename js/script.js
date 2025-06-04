@@ -559,7 +559,10 @@ class ActivityLoader {
             //     // ローカル環境ではAPIから読み込み
             //     response = await fetch('/api/activity');
             // }
-            response = await fetch('./data/activity.json'); // 常に静的ファイルから読み込む
+            
+            // キャッシュバスティングのためタイムスタンプを追加
+            const timestamp = new Date().getTime();
+            response = await fetch(`./data/activity.json?t=${timestamp}`); // 常に静的ファイルから読み込む
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);

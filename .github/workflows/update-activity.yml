@@ -37,16 +37,21 @@ jobs:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: node scripts/updateActivity.js
     
+    - name: Force GitHub Pages rebuild
+      run: |
+        # index.htmlにタイムスタンプコメントを追加してGitHub Pagesの再ビルドを強制
+        echo "<!-- Last updated: $(date +'%Y-%m-%d %H:%M:%S UTC') -->" >> index.html
+    
     - name: Commit and push if changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add data/activity.json
+        git add data/activity.json index.html
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          git commit -m "Auto-update: activity data - $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "🤖 Auto-update activity data - $(date +'%Y-%m-%d %H:%M:%S')"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
         fi 
