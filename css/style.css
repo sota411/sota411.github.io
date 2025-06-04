@@ -2144,7 +2144,7 @@ img[data-src][src] {
 
 .achievement-item {
     background: rgba(255, 193, 7, 0.1);
-    padding: 12px 15px;
+    padding: 10px 12px 10px 22px;
     margin-bottom: 8px;
     border-radius: 8px;
     border-left: 4px solid #FFC107;
@@ -2163,15 +2163,24 @@ img[data-src][src] {
 }
 
 .achievement-item::before {
-    content: '🏆';
+    content: '\f091'; /* FontAwesome trophy icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
     position: absolute;
-    left: -8px;
+    left: -10px;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--primary-bg);
-    padding: 2px;
+    background: #FFC107;
+    color: var(--bg-color);
+    padding: 5px;
     border-radius: 50%;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
 }
 
 /* Mobile Responsive */
