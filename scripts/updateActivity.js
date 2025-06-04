@@ -44,22 +44,17 @@ const ActivityUtils = {
     // フォールバックデータを作成
     createFallbackActivityData(generatedBy = 'Local Server') {
         return {
-            summary: 'データ取得中にエラーが発生しましたが、継続的な技術学習と開発活動を行っています。プログラミング、AI技術の習得、インターンシップでの実務経験など、幅広い分野で成長を続けています。',
-            highlights: [
-                "継続的な技術学習と実践的な開発経験",
-                "インターンシップでの実務経験の積み重ね",
-                "プログラミングスキルの向上と新技術への挑戦",
-                "資格取得や大会参加などの成果"
-            ],
-            topics: ["開発", "学習", "インターン", "技術"],
+            summary: 'Gemini APIでの分析に失敗しました。API設定を確認してください。',
+            highlights: ["Gemini API の設定を確認してください"],
+            topics: [],
             stats: {
                 tweetCount: 0,
-                topicCount: 4,
-                engagementRate: 50
+                topicCount: 0,
+                engagementRate: 0
             },
             rawTweets: [],
             lastUpdated: new Date().toISOString(),
-            generatedBy: `${generatedBy} (Fallback)`,
+            generatedBy: `${generatedBy} (API Error)`,
             error: true
         };
     },
@@ -75,7 +70,7 @@ const ActivityUtils = {
             },
             GEMINI_API: {
                 API_KEY: process.env.GEMINI_API_KEY,
-                MODEL: 'gemini-2.5-flash',
+                MODEL: 'gemini-2.5-flash-preview-05-20',
                 BASE_URL: 'https://generativelanguage.googleapis.com/v1beta/models'
             }
         };
@@ -136,20 +131,41 @@ async function updateActivity(isStatic = false) {
         
         // Gemini APIでツイートを統合・分析
         console.log('Gemini APIでツイート内容を分析中...');
-        const analysis = await geminiService.analyzeTweets(tweets);
+        
+        let analysis;
+        try {
+            analysis = await geminiService.analyzeTweets(tweets);
+        } catch (geminiError) {
+            console.error('Gemini API 分析エラー:', geminiError.message);
+            
+            if (isStatic) {
+                // GitHub Actions環境では最低限のフォールバックのみ
+                const fallbackData = ActivityUtils.createFallbackActivityData('GitHub Actions');
+                ActivityUtils.saveActivityData(fallbackData);
+                console.log('Gemini API エラーのためフォールバックデータを保存しました');
+                process.exit(1);
+            } else {
+                // ローカル環境ではエラーを再スロー
+                throw new Error(`Gemini API による分析に失敗しました: ${geminiError.message}`);
+            }
+        }
         
         // 統計データを計算
         const stats = ActivityUtils.calculateStats(tweets, analysis);
         
-        // 結果をまとめる
+        // 結果をまとめる（Gemini の結果のみ使用）
         const activityData = {
             summary: analysis.summary,
             highlights: analysis.highlights || [],
             topics: analysis.topics || [],
+            mood: analysis.mood || 'ニュートラル',
+            technologies: analysis.technologies || [],
+            achievements: analysis.achievements || [],
+            focus_area: analysis.focus_area || '技術学習',
             stats: stats,
             rawTweets: tweets.slice(0, 5), // 最新5件のみ保存
             lastUpdated: new Date().toISOString(),
-            generatedBy
+            generatedBy: `${generatedBy} (Gemini AI)`
         };
         
         // データを保存

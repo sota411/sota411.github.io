@@ -1982,3 +1982,230 @@ img[data-src][src] {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* Gemini Analysis Details */
+.gemini-details {
+    background: rgba(25, 25, 25, 0.9);
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+    border: 1px solid rgba(100, 181, 246, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.gemini-details.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gemini-analysis-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(100, 181, 246, 0.2);
+}
+
+.gemini-analysis-header h4 {
+    color: var(--accent-color-1);
+    margin: 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gemini-analysis-header i {
+    color: var(--accent-color-2);
+}
+
+.analysis-item {
+    margin-bottom: 20px;
+    background: rgba(30, 30, 30, 0.5);
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.analysis-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.analysis-item:last-child {
+    margin-bottom: 0;
+}
+
+.item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.item-header i {
+    color: var(--accent-color-1);
+    font-size: 1.1rem;
+}
+
+.item-title {
+    font-weight: 600;
+    color: var(--primary-text);
+    font-size: 1rem;
+}
+
+.item-content {
+    color: var(--secondary-text);
+    line-height: 1.6;
+}
+
+/* Focus Area Styles */
+.focus-content {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--accent-color-1);
+    background: rgba(100, 181, 246, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color-1);
+}
+
+/* Mood Styles */
+.mood-content {
+    display: flex;
+    align-items: center;
+}
+
+.mood-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.mood-ポジティブ {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.mood-ニュートラル {
+    background: rgba(158, 158, 158, 0.2);
+    color: #9E9E9E;
+    border: 1px solid rgba(158, 158, 158, 0.3);
+}
+
+.mood-チャレンジング {
+    background: rgba(255, 152, 0, 0.2);
+    color: #FF9800;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.mood-ネガティブ {
+    background: rgba(244, 67, 54, 0.2);
+    color: #F44336;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+/* Technology Tags */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-tag {
+    background: rgba(100, 181, 246, 0.1);
+    color: var(--accent-color-1);
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(100, 181, 246, 0.2);
+    transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    background: rgba(100, 181, 246, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Achievements List */
+.achievements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.achievement-item {
+    background: rgba(255, 193, 7, 0.1);
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border-left: 4px solid #FFC107;
+    color: var(--secondary-text);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.achievement-item:hover {
+    background: rgba(255, 193, 7, 0.15);
+    transform: translateX(5px);
+}
+
+.achievement-item:last-child {
+    margin-bottom: 0;
+}
+
+.achievement-item::before {
+    content: '🏆';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary-bg);
+    padding: 2px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .gemini-details {
+        padding: 20px;
+        margin-top: 15px;
+    }
+    
+    .analysis-item {
+        padding: 12px;
+    }
+    
+    .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .tech-tags {
+        gap: 6px;
+    }
+    
+    .tech-tag {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+    
+    .focus-content {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
+    
+    .achievement-item {
+        padding: 10px 12px;
+    }
+}

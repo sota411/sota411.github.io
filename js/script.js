@@ -602,6 +602,11 @@ class ActivityLoader {
         if (data.highlights && data.highlights.length > 0) {
             this.showHighlights(data.highlights);
         }
+
+        // Gemini 分析の詳細情報を表示
+        if (data.mood || data.technologies || data.achievements || data.focus_area) {
+            this.showGeminiDetails(data);
+        }
     }
 
     updateStats(stats) {
@@ -670,6 +675,103 @@ class ActivityLoader {
             
             summaryContent.insertAdjacentHTML('beforeend', highlightsHtml);
         }
+    }
+
+    showGeminiDetails(data) {
+        // Gemini分析の詳細情報を表示する要素を作成
+        let detailsContainer = document.querySelector('.gemini-details');
+        
+        if (!detailsContainer) {
+            detailsContainer = document.createElement('div');
+            detailsContainer.className = 'gemini-details';
+            this.summaryElement.parentElement.appendChild(detailsContainer);
+        }
+        
+        let detailsHtml = '<div class="gemini-analysis-header"><h4><i class="fas fa-robot"></i> AI分析結果</h4></div>';
+        
+        // 注力分野
+        if (data.focus_area) {
+            detailsHtml += `
+                <div class="analysis-item focus-area">
+                    <div class="item-header">
+                        <i class="fas fa-bullseye"></i>
+                        <span class="item-title">現在の注力分野</span>
+                    </div>
+                    <div class="item-content focus-content">
+                        ${data.focus_area}
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 全体的な雰囲気
+        if (data.mood) {
+            const moodIcon = this.getMoodIcon(data.mood);
+            detailsHtml += `
+                <div class="analysis-item mood">
+                    <div class="item-header">
+                        <i class="${moodIcon}"></i>
+                        <span class="item-title">全体的な雰囲気</span>
+                    </div>
+                    <div class="item-content mood-content">
+                        <span class="mood-badge mood-${data.mood.toLowerCase()}">${data.mood}</span>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 使用技術
+        if (data.technologies && data.technologies.length > 0) {
+            detailsHtml += `
+                <div class="analysis-item technologies">
+                    <div class="item-header">
+                        <i class="fas fa-code"></i>
+                        <span class="item-title">言及された技術 (${data.technologies.length})</span>
+                    </div>
+                    <div class="item-content">
+                        <div class="tech-tags">
+                            ${data.technologies.map(tech => 
+                                `<span class="tech-tag">${tech}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 具体的な成果
+        if (data.achievements && data.achievements.length > 0) {
+            detailsHtml += `
+                <div class="analysis-item achievements">
+                    <div class="item-header">
+                        <i class="fas fa-trophy"></i>
+                        <span class="item-title">具体的な成果 (${data.achievements.length})</span>
+                    </div>
+                    <div class="item-content">
+                        <ul class="achievements-list">
+                            ${data.achievements.map(achievement => 
+                                `<li class="achievement-item">${achievement}</li>`
+                            ).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+        
+        detailsContainer.innerHTML = detailsHtml;
+        
+        // アニメーション効果を追加
+        detailsContainer.classList.add('fade-in');
+    }
+    
+    getMoodIcon(mood) {
+        const moodIcons = {
+            'ポジティブ': 'fas fa-smile',
+            'ニュートラル': 'fas fa-meh',
+            'チャレンジング': 'fas fa-fist-raised',
+            'ネガティブ': 'fas fa-frown'
+        };
+        return moodIcons[mood] || 'fas fa-meh';
     }
 
     showError() {
