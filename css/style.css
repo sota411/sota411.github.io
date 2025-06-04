@@ -2144,13 +2144,16 @@ img[data-src][src] {
 
 .achievement-item {
     background: rgba(255, 193, 7, 0.1);
-    padding: 10px 12px 10px 22px;
+    padding: 10px 15px;
     margin-bottom: 8px;
     border-radius: 8px;
     border-left: 4px solid #FFC107;
     color: var(--secondary-text);
     transition: all 0.3s ease;
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .achievement-item:hover {
@@ -2163,24 +2166,11 @@ img[data-src][src] {
 }
 
 .achievement-item::before {
-    content: '\f091'; /* FontAwesome trophy icon */
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    position: absolute;
-    left: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #FFC107;
-    color: var(--bg-color);
-    padding: 5px;
-    border-radius: 50%;
-    font-size: 0.6rem;
-    width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
+    content: '•';
+    color: #FFC107;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
 }
 
 /* Mobile Responsive */
