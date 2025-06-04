@@ -6,6 +6,9 @@ on:
     - cron: '0 23 */15 * *'
   workflow_dispatch: # 手動実行も可能
 
+permissions:
+  contents: write  # リポジトリへの書き込み権限
+
 jobs:
   update-activity:
     runs-on: ubuntu-latest
@@ -13,6 +16,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
       
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -33,6 +38,8 @@ jobs:
       run: node scripts/updateActivity.js
     
     - name: Commit and push if changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -41,5 +48,4 @@ jobs:
           echo "No changes to commit"
         else
           git commit -m "🤖 Auto-update activity data - $(date +'%Y-%m-%d %H:%M:%S')"
-          git push
-        fi 
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main 
