@@ -1,16 +1,242 @@
 {
-  "summary": "Gemini APIでの分析に失敗しました。API設定を確認してください。",
+  "summary": "過去15日間、生成AI技術の深掘りと活用に注力しました。具体的には、G検定に合格し、GeminiやClaude Sonnetなど様々なモデルの性能を比較検証。特にGeminiの出力言語問題解決や、学生向け無償サービスであるGemini Studentへの移行を進め、コスト最適化も図りました。また、Github Actionsと各種APIを活用したツイート自動化を試みるなど、実践的な取り組みも開始。Obsidianを用いた情報整理への関心も示し、常に新しい知識と技術の吸収に努めています。生成AIは情報収集スタイルに大きな変化をもたらしており、その可能性を探求中です。",
   "highlights": [
-    "Gemini API の設定を確認してください"
+    "G検定に合格し、AIに関する専門知識を習得しました。",
+    "Google DeepSearch、Claude Code、Gemini 2.5 Proなど、最新の生成AIモデルに積極的に触れ、その特性や活用方法を検証しました。",
+    "Github Actions、X API、Gemini APIを活用し、ツイートの自動化・統合といった実用的なシステム構築を試みています。",
+    "学生向けサービス（GitHub Education, Google AI Pro, Gemini Student）を最大限に活用し、学習環境の最適化とコスト削減を実現しました。",
+    "生成AIを情報収集やプロンプト活用の強力なツールとして愛用し、自身の作業スタイルに大きな変化を感じています。"
   ],
-  "topics": [],
+  "topics": [
+    "生成AI (活用, 評価, プロンプトエンジニアリング)",
+    "自動化とAPI連携",
+    "最新技術の探求",
+    "自己学習と資格取得",
+    "情報管理と効率化"
+  ],
+  "mood": "ポジティブ、探求心旺盛",
+  "technologies": [
+    "Github Actions",
+    "X API",
+    "Gemini (API, Pro, Student)",
+    "Google DeepSearch",
+    "Claude (Code, Sonnet)",
+    "Obsidian",
+    "ChatGPT",
+    "GitHub Education",
+    "Google AI Pro",
+    "Codex"
+  ],
+  "achievements": [
+    "G検定に合格しました。",
+    "Gemini 2.5 Proの出力言語が英語になる問題を、Chromeの言語設定変更で解決しました。",
+    "Gemini Studentの利用を開始し、Google Workspaceの解約によるコスト最適化を実現しました。"
+  ],
+  "focus_area": "生成AIの最新動向追跡と実践的な活用、およびそれらを支える自動化技術の導入",
   "stats": {
-    "tweetCount": 0,
-    "topicCount": 0,
-    "engagementRate": 0
+    "tweetCount": 21,
+    "topicCount": 5,
+    "engagementRate": 28
   },
-  "rawTweets": [],
-  "lastUpdated": "2025-06-04T10:39:34.358Z",
-  "generatedBy": "GitHub Actions (API Error)",
-  "error": true
+  "rawTweets": [
+    {
+      "id": "1930151347476627609",
+      "text": "Github actions, X api, gemini apiを活用してツイートの自動反映・統合をしてみる.",
+      "created_at": "2025-06-04T06:35:16.000Z",
+      "metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 16
+      },
+      "context": [
+        {
+          "domain": {
+            "id": "46",
+            "name": "Business Taxonomy",
+            "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+          },
+          "entity": {
+            "id": "1557697333571112960",
+            "name": "Technology Business",
+            "description": "Brands, companies, advertisers and every non-person handle with the profit intent related to softwares, apps, communication equipments, hardwares"
+          }
+        },
+        {
+          "domain": {
+            "id": "30",
+            "name": "Entities [Entity Service]",
+            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
+          },
+          "entity": {
+            "id": "848920371311001600",
+            "name": "Technology",
+            "description": "Technology and computing"
+          }
+        },
+        {
+          "domain": {
+            "id": "66",
+            "name": "Interests and Hobbies Category",
+            "description": "A grouping of interests and hobbies entities, like Novelty Food or Destinations"
+          },
+          "entity": {
+            "id": "848921413196984320",
+            "name": "Computer programming",
+            "description": "Computer programming"
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "848921413196984320",
+            "name": "Computer programming",
+            "description": "Computer programming"
+          }
+        },
+        {
+          "domain": {
+            "id": "45",
+            "name": "Brand Vertical",
+            "description": "Top level entities that describe a Brands industry"
+          },
+          "entity": {
+            "id": "781974597226799105",
+            "name": "B2B"
+          }
+        },
+        {
+          "domain": {
+            "id": "30",
+            "name": "Entities [Entity Service]",
+            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
+          },
+          "entity": {
+            "id": "781974597172203520",
+            "name": "Services - B2B"
+          }
+        },
+        {
+          "domain": {
+            "id": "47",
+            "name": "Brand",
+            "description": "Brands and Companies"
+          },
+          "entity": {
+            "id": "10040692468",
+            "name": "GitHub"
+          }
+        },
+        {
+          "domain": {
+            "id": "29",
+            "name": "Events [Entity Service]",
+            "description": "Real world events. "
+          },
+          "entity": {
+            "id": "1750052293607669760",
+            "name": "DevPlatform JP"
+          }
+        }
+      ]
+    },
+    {
+      "id": "1930146066852393365",
+      "text": "https://t.co/lRtO4SCXZR\n遂にGoogleからOSSのdeepsearch出たんだ. 試さないと.",
+      "created_at": "2025-06-04T06:14:17.000Z",
+      "metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 16
+      },
+      "context": [
+        {
+          "domain": {
+            "id": "30",
+            "name": "Entities [Entity Service]",
+            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
+          },
+          "entity": {
+            "id": "781974596752842752",
+            "name": "Services"
+          }
+        },
+        {
+          "domain": {
+            "id": "47",
+            "name": "Brand",
+            "description": "Brands and Companies"
+          },
+          "entity": {
+            "id": "10026378521",
+            "name": "Google "
+          }
+        },
+        {
+          "domain": {
+            "id": "48",
+            "name": "Product",
+            "description": "Products created by Brands.  Examples: Ford Explorer, Apple iPhone."
+          },
+          "entity": {
+            "id": "1395474411180892160",
+            "name": "Google brand conversation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "1930032564636668411",
+      "text": "○○の資料を作成したいので, 資料に必要な情報を精査し, 質問を作成してください.\nというプロンプトをかなり愛用している.",
+      "created_at": "2025-06-03T22:43:16.000Z",
+      "metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 5
+      },
+      "context": []
+    },
+    {
+      "id": "1929801762090713423",
+      "text": "久しぶりに生成AIの類いを一切使わないで, コードを書いてみようと思う.",
+      "created_at": "2025-06-03T07:26:08.000Z",
+      "metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 18
+      },
+      "context": []
+    },
+    {
+      "id": "1929784644800495725",
+      "text": "おお, 待望の機能だ. https://t.co/jR1r5uhKSN",
+      "created_at": "2025-06-03T06:18:07.000Z",
+      "metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 39
+      },
+      "context": []
+    }
+  ],
+  "lastUpdated": "2025-06-04T10:55:29.196Z",
+  "generatedBy": "GitHub Actions (Gemini AI)"
 }
