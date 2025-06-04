@@ -75,7 +75,7 @@ const ActivityUtils = {
             },
             GEMINI_API: {
                 API_KEY: process.env.GEMINI_API_KEY,
-                MODEL: 'gemini-1.5-flash',
+                MODEL: 'gemini-2.5-flash',
                 BASE_URL: 'https://generativelanguage.googleapis.com/v1beta/models'
             }
         };

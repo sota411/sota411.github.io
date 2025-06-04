@@ -14,25 +14,30 @@ class GeminiService {
             const tweetTexts = tweets.map(tweet => `- ${tweet.text}`).join('\n');
             
             const prompt = `
-以下は過去15日間のTwitterの投稿内容です。これらの内容を分析して、以下の形式でJSON形式で要約してください：
+あなたは優秀なデータアナリストです。以下のTwitter投稿を分析し、ポートフォリオサイト用の魅力的な活動報告を作成してください。
 
-ツイート内容:
+【分析対象のツイート（過去15日間）】:
 ${tweetTexts}
 
-要求する分析結果（JSON形式で回答してください）:
+【出力形式】（必ずJSON形式で回答してください）:
 {
-    "summary": "過去15日間の活動内容を自然な日本語で200文字程度でまとめた文章",
-    "highlights": ["特に重要な出来事や成果を3-5個の短い文で表現"],
-    "topics": ["主要なトピックやテーマ（最大5個）"],
-    "mood": "全体的な感情や雰囲気（ポジティブ/ニュートラル/etc）",
-    "technologies": ["言及された技術やツール（最大10個）"]
+    "summary": "過去15日間の活動を要約した魅力的な文章（150-300文字）",
+    "highlights": ["特に注目すべき成果や学習内容（3-6個の具体的な項目）"],
+    "topics": ["主要な活動テーマ（最大5個）"],
+    "mood": "全体的な雰囲気（例：積極的, 学習意欲旺盛, 挑戦的, など）",
+    "technologies": ["言及された技術・ツール・言語（最大10個）"],
+    "achievements": ["具体的な成果や達成事項（あれば）"],
+    "focus_area": "現在最も注力している分野"
 }
 
-注意：
-- summary は読みやすく、第三者にも理解できる内容にしてください
-- highlights は実際の成果や学習内容を具体的に記載してください
-- 技術的な内容については専門用語を適切に使用してください
-- 全体的にポートフォリオサイトの読者に向けた内容として適切にしてください
+【分析の指針】:
+- ポジティブで成長意欲を感じさせる表現を使用
+- 技術的な内容は適切な専門用語を使用
+- 読み手（採用担当者や協力者）に魅力を伝える
+- 具体性と客観性のバランスを保つ
+- 継続的な学習姿勢をアピール
+
+【重要】: 回答は必ずJSON形式で、コードブロック不要で出力してください。
 `;
 
             const result = await this.generativeModel.generateContent(prompt);
@@ -45,10 +50,17 @@ ${tweetTexts}
                 if (jsonMatch) {
                     const analysis = JSON.parse(jsonMatch[0]);
                     console.log('Gemini API 分析完了');
+                    console.log('分析結果:', {
+                        summaryLength: analysis.summary?.length || 0,
+                        highlightsCount: analysis.highlights?.length || 0,
+                        topicsCount: analysis.topics?.length || 0,
+                        technologiesCount: analysis.technologies?.length || 0
+                    });
                     return analysis;
                 }
             } catch (parseError) {
                 console.error('JSON解析エラー:', parseError);
+                console.log('生のレスポンス:', text);
             }
             
             // JSON解析に失敗した場合のフォールバック
