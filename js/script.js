@@ -65,30 +65,33 @@ if (typingContainer && typingCursor) {
     setTimeout(typeText, 500);
 }
 
-// モバイルメニュートグル
-burger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    burger.classList.toggle('toggle');
-    
-    // ナビゲーションメニューのアニメーション
-    navLinkItems.forEach((link, index) => {
-        // リンクのアニメーションをリセット
-        if (link.style.animation) {
-            link.style.animation = '';
+// モバイルメニュートグル（メイン処理）
+if (burger && navLinks) {
+    burger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        burger.classList.toggle('toggle');
+        
+        // ボディのスクロールを制御
+        if (navLinks.classList.contains('active')) {
+            document.body.style.overflow = 'hidden'; // メニューが開いている間はスクロールを無効化
         } else {
-            // フェードインアニメーションを設定（遅延を付けて連続的に表示）
-            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-            link.style.opacity = '1';
+            document.body.style.overflow = ''; // メニューを閉じたらスクロールを有効化
         }
+        
+        // リンクのアニメーション
+        const menuItems = navLinks.querySelectorAll('li'); 
+        menuItems.forEach((item, index) => {
+            item.style.animation = '';
+            setTimeout(() => {
+                if (navLinks.classList.contains('active')) {
+                    item.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                } else {
+                    item.style.animation = '';
+                }
+            }, 10);
+        });
     });
-    
-    // ボディのスクロールを制御
-    if (navLinks.classList.contains('active')) {
-        document.body.style.overflow = 'hidden'; // メニューが開いている間はスクロールを無効化
-    } else {
-        document.body.style.overflow = ''; // メニューを閉じたらスクロールを有効化
-    }
-});
+}
 
 // スクロール時のナビゲーションバーの背景変更
 window.addEventListener('scroll', () => {
@@ -106,11 +109,6 @@ document.querySelectorAll('.nav-links li a').forEach(link => {
             navLinks.classList.remove('active');
             burger.classList.remove('toggle');
             document.body.style.overflow = ''; // スクロールを有効化
-            
-            // アニメーションをリセット
-            navLinkItems.forEach(link => {
-                link.style.animation = '';
-            });
         }
     });
 });
@@ -141,11 +139,6 @@ window.addEventListener('resize', () => {
         navLinks.classList.remove('active');
         burger.classList.remove('toggle');
         document.body.style.overflow = '';
-        
-        // アニメーションをリセット
-        navLinkItems.forEach(link => {
-            link.style.animation = '';
-        });
     }
 });
 
@@ -464,29 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // モバイルナビゲーションのトグル
-    if (burger && navMenu) {
-        burger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            burger.classList.toggle('toggle');
-
-            // リンクのアニメーション - navMenu内のリストアイテムをターゲット
-            const menuItems = navMenu.querySelectorAll('li'); 
-            menuItems.forEach((item, index) => {
-                // 新しいアニメーションを設定する前に既存のアニメーションをクリア
-                item.style.animation = '';
-                
-                // CSS遷移が動作するように、少し遅延してからアニメーションを適用
-                setTimeout(() => {
-                    if (navMenu.classList.contains('active')) {
-                        item.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-                    } else {
-                        item.style.animation = '';
-                    }
-                }, 10);
-            });
-        });
-    }
+    // 重複したモバイルナビゲーション処理を削除（上記で既に処理済み）
 
     // プロジェクトフィルタリング
     projectFilters.forEach(button => {
@@ -500,7 +471,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             projectCards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                const cardContainer = card.parentElement; // 必要に応じてグリッドアイテムコンテナを取得
 
                 // フィルタリング前にAOSアニメーション状態をリセット
                 card.classList.remove('aos-animate');

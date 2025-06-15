@@ -1030,6 +1030,39 @@ footer {
     .nav-links li {
         margin: 15px 0;
         opacity: 0;
+        transform: translateX(100%); /* 非表示時の位置 */
+        transition: opacity 0.5s ease, transform 0.5s ease; /* アニメーションの定義 */
+    }
+
+    .nav-links.active li {
+        opacity: 1; /* 表示時の透明度 */
+        transform: translateX(0); /* 表示時の位置 */
+    }
+
+    /* ナビゲーションリンクのアニメーション遅延 */
+    .nav-links.active li:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+    .nav-links.active li:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+    .nav-links.active li:nth-child(3) {
+        transition-delay: 0.3s;
+    }
+    .nav-links.active li:nth-child(4) {
+        transition-delay: 0.4s;
+    }
+    .nav-links.active li:nth-child(5) {
+        transition-delay: 0.5s;
+    }
+    .nav-links.active li:nth-child(6) {
+        transition-delay: 0.6s;
+    }
+    .nav-links.active li:nth-child(7) {
+        transition-delay: 0.7s;
+    }
+    .nav-links.active li:nth-child(8) {
+        transition-delay: 0.8s;
     }
     
     .burger {
@@ -1270,6 +1303,18 @@ footer {
 
 .toggle .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ナビゲーションリンクのフェードインアニメーション */
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }
 
 /* 資格セクション */
