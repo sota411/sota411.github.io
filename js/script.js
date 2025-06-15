@@ -491,14 +491,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// アクティビティ読み込み機能
-class ActivityLoader {
+// Modern Activity Dashboard Manager
+class ModernActivityDashboard {
     constructor() {
         this.summaryElement = document.getElementById('summaryContent');
         this.lastUpdatedElement = document.getElementById('lastUpdated');
         this.tweetCountElement = document.getElementById('tweetCount');
         this.topicCountElement = document.getElementById('topicCount');
         this.engagementRateElement = document.getElementById('engagementRate');
+        this.insightsGrid = document.getElementById('insightsGrid');
+        this.activityTimeline = document.getElementById('activityTimeline');
         
         this.init();
     }
@@ -548,38 +550,173 @@ class ActivityLoader {
     }
 
     updateUI(data) {
-        // 要約テキストの更新
+        // Summary content update with modern styling
         if (this.summaryElement) {
-            this.summaryElement.innerHTML = this.formatSummary(data.summary);
+            this.summaryElement.innerHTML = this.formatModernSummary(data.summary);
             this.summaryElement.classList.add('updated');
             
-            // アニメーション後にクラスを削除
             setTimeout(() => {
                 this.summaryElement.classList.remove('updated');
             }, 600);
         }
 
-        // 最終更新時刻の更新
+        // Last updated with modern format
         if (this.lastUpdatedElement && data.lastUpdated) {
             const updatedDate = new Date(data.lastUpdated);
             this.lastUpdatedElement.textContent = 
-                `最終更新: ${updatedDate.toLocaleDateString('ja-JP')} ${updatedDate.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}`;
+                `${updatedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} ${updatedDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}`;
         }
 
-        // 統計データの更新
+        // Enhanced stats update with animations
         if (data.stats) {
-            this.updateStats(data.stats);
+            this.updateModernStats(data.stats);
         }
 
-        // ハイライトの表示（もしあれば）
-        if (data.highlights && data.highlights.length > 0) {
-            this.showHighlights(data.highlights);
-        }
-
-        // Gemini 分析の詳細情報を表示
+        // Generate modern insights
         if (data.mood || data.technologies || data.achievements || data.focus_area) {
-            this.showGeminiDetails(data);
+            this.generateInsights(data);
         }
+
+        // Create activity timeline
+        if (data.highlights && data.highlights.length > 0) {
+            this.createTimeline(data.highlights);
+        }
+    }
+
+    formatModernSummary(summary) {
+        if (!summary) {
+            return `
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Analyzing activities...</p>
+                </div>
+            `;
+        }
+        
+        const paragraphs = summary.split('\n').filter(p => p.trim().length > 0);
+        return `
+            <div class="summary-text">
+                ${paragraphs.map(p => `<p>${p.trim()}</p>`).join('')}
+            </div>
+        `;
+    }
+
+    updateModernStats(stats) {
+        const statItems = [
+            { element: this.tweetCountElement, value: stats.tweetCount || 0, max: 100 },
+            { element: this.topicCountElement, value: stats.topicCount || 0, max: 20 },
+            { element: this.engagementRateElement, value: stats.engagementRate || 0, max: 100, suffix: '%' }
+        ];
+
+        statItems.forEach((item, index) => {
+            if (item.element) {
+                setTimeout(() => {
+                    this.animateStatNumber(item.element, item.value, item.suffix);
+                    this.animateStatBar(item.element, item.value, item.max);
+                }, index * 200);
+            }
+        });
+    }
+
+    animateStatNumber(element, targetValue, suffix = '') {
+        const startValue = 0;
+        const duration = 1500;
+        const startTime = performance.now();
+
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.round(startValue + (targetValue - startValue) * easeOut);
+            
+            element.textContent = currentValue + suffix;
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+
+        requestAnimationFrame(animate);
+    }
+
+    animateStatBar(element, value, max) {
+        const card = element.closest('.stat-card');
+        if (card) {
+            const progressBar = card.querySelector('.stat-progress');
+            if (progressBar) {
+                const percentage = Math.min((value / max) * 100, 100);
+                setTimeout(() => {
+                    progressBar.style.width = `${percentage}%`;
+                }, 300);
+            }
+        }
+    }
+
+    generateInsights(data) {
+        if (!this.insightsGrid) return;
+
+        const insights = [];
+
+        if (data.focus_area) {
+            insights.push({
+                type: 'focus',
+                icon: 'fas fa-bullseye',
+                title: 'Current Focus',
+                content: data.focus_area,
+                color: 'var(--accent-color-1)'
+            });
+        }
+
+        if (data.mood) {
+            insights.push({
+                type: 'mood',
+                icon: 'fas fa-smile',
+                title: 'Overall Mood',
+                content: data.mood,
+                color: 'var(--accent-color-2)'
+            });
+        }
+
+        if (data.technologies && data.technologies.length > 0) {
+            insights.push({
+                type: 'tech',
+                icon: 'fas fa-code',
+                title: 'Technologies',
+                content: data.technologies.slice(0, 3).join(', '),
+                color: 'var(--accent-color-1)'
+            });
+        }
+
+        this.insightsGrid.innerHTML = insights.map(insight => `
+            <div class="insight-card" data-type="${insight.type}">
+                <div class="insight-icon" style="color: ${insight.color}">
+                    <i class="${insight.icon}"></i>
+                </div>
+                <div class="insight-content">
+                    <h4>${insight.title}</h4>
+                    <p>${insight.content}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    createTimeline(highlights) {
+        if (!this.activityTimeline) return;
+
+        this.activityTimeline.innerHTML = highlights.slice(0, 5).map((highlight, index) => `
+            <div class="timeline-item" style="animation-delay: ${index * 0.1}s">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <p>${highlight}</p>
+                    <span class="timeline-time">${this.getRelativeTime(index)}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    getRelativeTime(index) {
+        const times = ['2h ago', '5h ago', '1d ago', '2d ago', '3d ago'];
+        return times[index] || `${index + 1}d ago`;
     }
 
     updateStats(stats) {
@@ -768,7 +905,24 @@ class ActivityLoader {
     }
 }
 
-// DOMが読み込まれたらアクティビティローダーを初期化
+// Modern refresh function for insights
+function refreshInsights() {
+    const refreshBtn = document.querySelector('.refresh-btn');
+    if (refreshBtn) {
+        refreshBtn.style.transform = 'rotate(180deg)';
+        setTimeout(() => {
+            refreshBtn.style.transform = 'rotate(0deg)';
+        }, 500);
+    }
+    
+    // Trigger insights refresh
+    const dashboard = window.modernDashboard;
+    if (dashboard) {
+        dashboard.loadActivity();
+    }
+}
+
+// DOMが読み込まれたらモダンダッシュボードを初期化
 document.addEventListener('DOMContentLoaded', () => {
     // 既存の初期化処理を維持
     if (typeof AOS !== 'undefined') {
@@ -779,8 +933,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // アクティビティローダーを初期化
+    // モダンアクティビティダッシュボードを初期化
     if (document.getElementById('summaryContent')) {
-        new ActivityLoader();
+        window.modernDashboard = new ModernActivityDashboard();
     }
 });
