@@ -1,203 +1,50 @@
 {
-  "summary": "過去15日間、生成AI技術の深掘りと活用に注力しました。具体的には、G検定に合格し、GeminiやClaude Sonnetなど様々なモデルの性能を比較検証。特にGeminiの出力言語問題解決や、学生向け無償サービスであるGemini Studentへの移行を進め、コスト最適化も図りました。また、Github Actionsと各種APIを活用したツイート自動化を試みるなど、実践的な取り組みも開始。Obsidianを用いた情報整理への関心も示し、常に新しい知識と技術の吸収に努めています。生成AIは情報収集スタイルに大きな変化をもたらしており、その可能性を探求中です。",
+  "summary": "過去15日間で、ネットワークエラーの原因調査と解決（Teredo活用）や、Linux環境構築への本格的な着手（vim、fcitx、ssh接続など）といった技術的課題に取り組みました。並行して、中学時代の友人の個人事業の手伝いや名刺作成、控除制度の調査といった自身の活動基盤を強化。また、ポートフォリオサイトの更新とGoogle Analytics登録、最新の生成AI技術（Deepsearch, Gemini APIなど）やGithub Actionsを用いた自動化にも積極的に関心を向け、学習と実践を深めています。",
   "highlights": [
-    "G検定に合格し、AIに関する専門知識を習得しました。",
-    "Google DeepSearch、Claude Code、Gemini 2.5 Proなど、最新の生成AIモデルに積極的に触れ、その特性や活用方法を検証しました。",
-    "Github Actions、X API、Gemini APIを活用し、ツイートの自動化・統合といった実用的なシステム構築を試みています。",
-    "学生向けサービス（GitHub Education, Google AI Pro, Gemini Student）を最大限に活用し、学習環境の最適化とコスト削減を実現しました。",
-    "生成AIを情報収集やプロンプト活用の強力なツールとして愛用し、自身の作業スタイルに大きな変化を感じています。"
+    "ナイトレインで発生したネットワークエラーをTeredoの有効化により解決しました。",
+    "GithubとのSSH接続を完了し、Linux環境構築に本格的に着手しています。",
+    "自身のポートフォリオサイトを更新し、Google Analyticsへの登録を完了しました。",
+    "家内労働者控除と学生控除の活用可能性を理解し、今後の活動における経済的な見通しを立てました。",
+    "Github Actions、X API、Gemini APIを活用したツイートの自動反映・統合の取り組みを開始しました。"
   ],
   "topics": [
-    "生成AI (活用, 評価, プロンプトエンジニアリング)",
-    "自動化とAPI連携",
-    "最新技術の探求",
-    "自己学習と資格取得",
-    "情報管理と効率化"
+    "ネットワーク技術と問題解決",
+    "Linux環境構築と開発環境整備",
+    "AI・生成AIの活用と研究",
+    "Webサイト開発と運用",
+    "個人活動とキャリア形成"
   ],
-  "mood": "ポジティブ、探求心旺盛",
+  "mood": "ポジティブかつ意欲的",
   "technologies": [
+    "Teredo",
+    "vim",
+    "Linux",
+    "Github",
+    "fcitx",
+    "Google Analytics",
+    "WSL",
     "Github Actions",
-    "X API",
-    "Gemini (API, Pro, Student)",
-    "Google DeepSearch",
-    "Claude (Code, Sonnet)",
-    "Obsidian",
-    "ChatGPT",
-    "GitHub Education",
-    "Google AI Pro",
-    "Codex"
+    "Gemini API",
+    "Deepsearch"
   ],
   "achievements": [
-    "G検定に合格しました。",
-    "Gemini 2.5 Proの出力言語が英語になる問題を、Chromeの言語設定変更で解決しました。",
-    "Gemini Studentの利用を開始し、Google Workspaceの解約によるコスト最適化を実現しました。"
+    "Teredo有効化によるネットワークエラーの解決",
+    "GithubとのSSH接続完了",
+    "自身の名刺作成",
+    "家内労働者控除と学生控除の活用可能性を発見",
+    "ポートフォリオサイトの更新とGoogle Analyticsへの登録"
   ],
-  "focus_area": "生成AIの最新動向追跡と実践的な活用、およびそれらを支える自動化技術の導入",
+  "focus_area": "Linux環境の構築と活用、Webサイトの高度化、最新のAI技術を活用した開発への取り組み",
   "stats": {
-    "tweetCount": 21,
+    "tweetCount": 22,
     "topicCount": 5,
-    "engagementRate": 28
+    "engagementRate": 29
   },
   "rawTweets": [
     {
-      "id": "1930151347476627609",
-      "text": "Github actions, X api, gemini apiを活用してツイートの自動反映・統合をしてみる.",
-      "created_at": "2025-06-04T06:35:16.000Z",
-      "metrics": {
-        "retweet_count": 0,
-        "reply_count": 0,
-        "like_count": 0,
-        "quote_count": 0,
-        "bookmark_count": 0,
-        "impression_count": 16
-      },
-      "context": [
-        {
-          "domain": {
-            "id": "46",
-            "name": "Business Taxonomy",
-            "description": "Categories within Brand Verticals that narrow down the scope of Brands"
-          },
-          "entity": {
-            "id": "1557697333571112960",
-            "name": "Technology Business",
-            "description": "Brands, companies, advertisers and every non-person handle with the profit intent related to softwares, apps, communication equipments, hardwares"
-          }
-        },
-        {
-          "domain": {
-            "id": "30",
-            "name": "Entities [Entity Service]",
-            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
-          },
-          "entity": {
-            "id": "848920371311001600",
-            "name": "Technology",
-            "description": "Technology and computing"
-          }
-        },
-        {
-          "domain": {
-            "id": "66",
-            "name": "Interests and Hobbies Category",
-            "description": "A grouping of interests and hobbies entities, like Novelty Food or Destinations"
-          },
-          "entity": {
-            "id": "848921413196984320",
-            "name": "Computer programming",
-            "description": "Computer programming"
-          }
-        },
-        {
-          "domain": {
-            "id": "131",
-            "name": "Unified Twitter Taxonomy",
-            "description": "A taxonomy of user interests. "
-          },
-          "entity": {
-            "id": "848921413196984320",
-            "name": "Computer programming",
-            "description": "Computer programming"
-          }
-        },
-        {
-          "domain": {
-            "id": "45",
-            "name": "Brand Vertical",
-            "description": "Top level entities that describe a Brands industry"
-          },
-          "entity": {
-            "id": "781974597226799105",
-            "name": "B2B"
-          }
-        },
-        {
-          "domain": {
-            "id": "30",
-            "name": "Entities [Entity Service]",
-            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
-          },
-          "entity": {
-            "id": "781974597172203520",
-            "name": "Services - B2B"
-          }
-        },
-        {
-          "domain": {
-            "id": "47",
-            "name": "Brand",
-            "description": "Brands and Companies"
-          },
-          "entity": {
-            "id": "10040692468",
-            "name": "GitHub"
-          }
-        },
-        {
-          "domain": {
-            "id": "29",
-            "name": "Events [Entity Service]",
-            "description": "Real world events. "
-          },
-          "entity": {
-            "id": "1750052293607669760",
-            "name": "DevPlatform JP"
-          }
-        }
-      ]
-    },
-    {
-      "id": "1930146066852393365",
-      "text": "https://t.co/lRtO4SCXZR\n遂にGoogleからOSSのdeepsearch出たんだ. 試さないと.",
-      "created_at": "2025-06-04T06:14:17.000Z",
-      "metrics": {
-        "retweet_count": 0,
-        "reply_count": 0,
-        "like_count": 0,
-        "quote_count": 0,
-        "bookmark_count": 0,
-        "impression_count": 16
-      },
-      "context": [
-        {
-          "domain": {
-            "id": "30",
-            "name": "Entities [Entity Service]",
-            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
-          },
-          "entity": {
-            "id": "781974596752842752",
-            "name": "Services"
-          }
-        },
-        {
-          "domain": {
-            "id": "47",
-            "name": "Brand",
-            "description": "Brands and Companies"
-          },
-          "entity": {
-            "id": "10026378521",
-            "name": "Google "
-          }
-        },
-        {
-          "domain": {
-            "id": "48",
-            "name": "Product",
-            "description": "Products created by Brands.  Examples: Ford Explorer, Apple iPhone."
-          },
-          "entity": {
-            "id": "1395474411180892160",
-            "name": "Google brand conversation"
-          }
-        }
-      ]
-    },
-    {
-      "id": "1930032564636668411",
-      "text": "○○の資料を作成したいので, 資料に必要な情報を精査し, 質問を作成してください.\nというプロンプトをかなり愛用している.",
-      "created_at": "2025-06-03T22:43:16.000Z",
+      "id": "1934715477147963426",
+      "text": "このアカウントのポストは15日おきに自動で収集, 要約されるが, メタタグぽいものを付けといたら無視されるのか検証してみる.",
+      "created_at": "2025-06-16T20:51:29.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
@@ -209,34 +56,132 @@
       "context": []
     },
     {
-      "id": "1929801762090713423",
-      "text": "久しぶりに生成AIの類いを一切使わないで, コードを書いてみようと思う.",
-      "created_at": "2025-06-03T07:26:08.000Z",
+      "id": "1934715084783407577",
+      "text": "vimへの関心を持ち始めている.\n&lt;meta action=\"no-summary\" data-type=\"log-entry\" /&gt;",
+      "created_at": "2025-06-16T20:49:56.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
-        "like_count": 0,
+        "like_count": 1,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 18
+        "impression_count": 8
       },
       "context": []
     },
     {
-      "id": "1929784644800495725",
-      "text": "おお, 待望の機能だ. https://t.co/jR1r5uhKSN",
-      "created_at": "2025-06-03T06:18:07.000Z",
+      "id": "1934712475678871899",
+      "text": "ナイトレインを友人と遊ぼうとしたところ, ネットワークエラーが発生し続けていたので, 原因を調査した.\n結局, Teredoを有効化することで解決しました.",
+      "created_at": "2025-06-16T20:39:34.000Z",
+      "metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 1,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 85
+      },
+      "context": []
+    },
+    {
+      "id": "1934711635991793781",
+      "text": "JANOG, ネットワークに対する知識が最も乏しい自信があるので不安ではある.\n少しでも学ばなければ.",
+      "created_at": "2025-06-16T20:36:13.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
         "like_count": 0,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 39
+        "impression_count": 9
       },
       "context": []
+    },
+    {
+      "id": "1934711398690701414",
+      "text": "https://t.co/TgJwTXedzm\n中学時代の友人が個人事業主になったので, ちょっとお手伝いすることになりました.",
+      "created_at": "2025-06-16T20:35:17.000Z",
+      "metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 7
+      },
+      "context": [
+        {
+          "domain": {
+            "id": "46",
+            "name": "Business Taxonomy",
+            "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+          },
+          "entity": {
+            "id": "1557696848252391426",
+            "name": "Financial Services Business",
+            "description": "Brands, companies, advertisers and every non-person handle with the profit intent related to Banks, Credit cards, Insurance, Investments, Stocks "
+          }
+        },
+        {
+          "domain": {
+            "id": "66",
+            "name": "Interests and Hobbies Category",
+            "description": "A grouping of interests and hobbies entities, like Novelty Food or Destinations"
+          },
+          "entity": {
+            "id": "857878891611865089",
+            "name": "Small business",
+            "description": "Small business"
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "781974596148793345",
+            "name": "Business & finance"
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "857878891611865089",
+            "name": "Small business",
+            "description": "Small business"
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "1503733786608955394",
+            "name": "Small and medium-sized business"
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "1584573725449408513",
+            "name": "Businesses by size"
+          }
+        }
+      ]
     }
   ],
-  "lastUpdated": "2025-06-04T10:55:29.196Z",
+  "lastUpdated": "2025-06-16T23:13:51.451Z",
   "generatedBy": "GitHub Actions (Gemini AI)"
 }
