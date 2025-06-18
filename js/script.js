@@ -65,82 +65,10 @@ if (typingContainer && typingCursor) {
     setTimeout(typeText, 500);
 }
 
-// モバイルメニュートグル（メイン処理）
-if (burger && navLinks) {
-    burger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        burger.classList.toggle('toggle');
-        
-        // ボディのスクロールを制御
-        if (navLinks.classList.contains('active')) {
-            document.body.style.overflow = 'hidden'; // メニューが開いている間はスクロールを無効化
-        } else {
-            document.body.style.overflow = ''; // メニューを閉じたらスクロールを有効化
-        }
-        
-        // リンクのアニメーション
-        const menuItems = navLinks.querySelectorAll('li'); 
-        menuItems.forEach((item, index) => {
-            item.style.animation = '';
-            setTimeout(() => {
-                if (navLinks.classList.contains('active')) {
-                    item.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-                } else {
-                    item.style.animation = '';
-                }
-            }, 10);
-        });
-    });
-}
 
-// スクロール時のナビゲーションバーの背景変更
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navContainer.classList.add('scrolled');
-    } else {
-        navContainer.classList.remove('scrolled');
-    }
-});
 
-// モバイルメニューのリンククリック時の処理
-document.querySelectorAll('.nav-links li a').forEach(link => {
-    link.addEventListener('click', () => {
-        if (navLinks.classList.contains('active')) { 
-            navLinks.classList.remove('active');
-            burger.classList.remove('toggle');
-            document.body.style.overflow = ''; // スクロールを有効化
-        }
-    });
-});
 
-// スムーズスクロール
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            // モバイル時はナビバーの高さを考慮
-            const navHeight = navContainer.getBoundingClientRect().height;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = targetPosition - navHeight;
-            
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
 
-// リサイズイベントの処理
-window.addEventListener('resize', () => {
-    // ウィンドウサイズが変更されたときにモバイルメニューを閉じる
-    if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
-        burger.classList.remove('toggle');
-        document.body.style.overflow = '';
-    }
-});
 
 // プロジェクトのフィルタリング
 function filterProjects(category) {
@@ -279,6 +207,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectGrid = document.querySelector('.projects-grid');
     const projectCards = document.querySelectorAll('.project-card');
     const preloader = document.getElementById('preloader');
+
+    // ハンバーガーメニューの処理（統合版）
+    if (burger && navMenu) {
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            burger.classList.toggle('toggle');
+            
+            // ボディのスクロールを制御
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+            
+            // リンクのアニメーション
+            const menuItems = navMenu.querySelectorAll('li');
+            menuItems.forEach((item, index) => {
+                item.style.animation = '';
+                setTimeout(() => {
+                    if (navMenu.classList.contains('active')) {
+                        item.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    } else {
+                        item.style.animation = '';
+                    }
+                }, 10);
+            });
+        });
+
+        // メニューリンククリック時の処理
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    burger.classList.remove('toggle');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // リサイズ時の処理
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                burger.classList.remove('toggle');
+                document.body.style.overflow = '';
+            }
+        });
+    }
 
     // プリローダーのフェードアウト
     window.addEventListener('load', () => {
@@ -452,12 +428,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (navMenu.classList.contains('active')) {
                     navMenu.classList.remove('active');
                     burger.classList.remove('toggle');
+                    document.body.style.overflow = '';
                 }
             }
         });
     });
 
-    // 重複したモバイルナビゲーション処理を削除（上記で既に処理済み）
 
     // プロジェクトフィルタリング
     projectFilters.forEach(button => {
@@ -560,7 +536,7 @@ class ModernActivityDashboard {
             }, 600);
         }
 
-        // Last updated with modern format
+        // Last updated with original data timestamp
         if (this.lastUpdatedElement && data.lastUpdated) {
             const updatedDate = new Date(data.lastUpdated);
             this.lastUpdatedElement.textContent = 
@@ -708,16 +684,11 @@ class ModernActivityDashboard {
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <p>${highlight}</p>
-                    <span class="timeline-time">${this.getRelativeTime(index)}</span>
                 </div>
             </div>
         `).join('');
     }
 
-    getRelativeTime(index) {
-        const times = ['2h ago', '5h ago', '1d ago', '2d ago', '3d ago'];
-        return times[index] || `${index + 1}d ago`;
-    }
 
     updateStats(stats) {
         if (this.tweetCountElement) {
@@ -902,23 +873,6 @@ class ModernActivityDashboard {
         [this.tweetCountElement, this.topicCountElement, this.engagementRateElement].forEach(el => {
             if (el) el.textContent = '--';
         });
-    }
-}
-
-// Modern refresh function for insights
-function refreshInsights() {
-    const refreshBtn = document.querySelector('.refresh-btn');
-    if (refreshBtn) {
-        refreshBtn.style.transform = 'rotate(180deg)';
-        setTimeout(() => {
-            refreshBtn.style.transform = 'rotate(0deg)';
-        }, 500);
-    }
-    
-    // Trigger insights refresh
-    const dashboard = window.modernDashboard;
-    if (dashboard) {
-        dashboard.loadActivity();
     }
 }
 
