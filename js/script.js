@@ -65,82 +65,10 @@ if (typingContainer && typingCursor) {
     setTimeout(typeText, 500);
 }
 
-// モバイルメニュートグル（メイン処理）
-if (burger && navLinks) {
-    burger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        burger.classList.toggle('toggle');
-        
-        // ボディのスクロールを制御
-        if (navLinks.classList.contains('active')) {
-            document.body.style.overflow = 'hidden'; // メニューが開いている間はスクロールを無効化
-        } else {
-            document.body.style.overflow = ''; // メニューを閉じたらスクロールを有効化
-        }
-        
-        // リンクのアニメーション
-        const menuItems = navLinks.querySelectorAll('li'); 
-        menuItems.forEach((item, index) => {
-            item.style.animation = '';
-            setTimeout(() => {
-                if (navLinks.classList.contains('active')) {
-                    item.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-                } else {
-                    item.style.animation = '';
-                }
-            }, 10);
-        });
-    });
-}
 
-// スクロール時のナビゲーションバーの背景変更
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navContainer.classList.add('scrolled');
-    } else {
-        navContainer.classList.remove('scrolled');
-    }
-});
 
-// モバイルメニューのリンククリック時の処理
-document.querySelectorAll('.nav-links li a').forEach(link => {
-    link.addEventListener('click', () => {
-        if (navLinks.classList.contains('active')) { 
-            navLinks.classList.remove('active');
-            burger.classList.remove('toggle');
-            document.body.style.overflow = ''; // スクロールを有効化
-        }
-    });
-});
 
-// スムーズスクロール
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            // モバイル時はナビバーの高さを考慮
-            const navHeight = navContainer.getBoundingClientRect().height;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = targetPosition - navHeight;
-            
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
 
-// リサイズイベントの処理
-window.addEventListener('resize', () => {
-    // ウィンドウサイズが変更されたときにモバイルメニューを閉じる
-    if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
-        burger.classList.remove('toggle');
-        document.body.style.overflow = '';
-    }
-});
 
 // プロジェクトのフィルタリング
 function filterProjects(category) {
@@ -279,6 +207,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectGrid = document.querySelector('.projects-grid');
     const projectCards = document.querySelectorAll('.project-card');
     const preloader = document.getElementById('preloader');
+
+    // ハンバーガーメニューの処理（統合版）
+    if (burger && navMenu) {
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            burger.classList.toggle('toggle');
+            
+            // ボディのスクロールを制御
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+            
+            // リンクのアニメーション
+            const menuItems = navMenu.querySelectorAll('li');
+            menuItems.forEach((item, index) => {
+                item.style.animation = '';
+                setTimeout(() => {
+                    if (navMenu.classList.contains('active')) {
+                        item.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    } else {
+                        item.style.animation = '';
+                    }
+                }, 10);
+            });
+        });
+
+        // メニューリンククリック時の処理
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    burger.classList.remove('toggle');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // リサイズ時の処理
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                burger.classList.remove('toggle');
+                document.body.style.overflow = '';
+            }
+        });
+    }
 
     // プリローダーのフェードアウト
     window.addEventListener('load', () => {
@@ -452,12 +428,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (navMenu.classList.contains('active')) {
                     navMenu.classList.remove('active');
                     burger.classList.remove('toggle');
+                    document.body.style.overflow = '';
                 }
             }
         });
     });
 
-    // 重複したモバイルナビゲーション処理を削除（上記で既に処理済み）
 
     // プロジェクトフィルタリング
     projectFilters.forEach(button => {
@@ -491,14 +467,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// アクティビティ読み込み機能
-class ActivityLoader {
+// Modern Activity Dashboard Manager
+class ModernActivityDashboard {
     constructor() {
         this.summaryElement = document.getElementById('summaryContent');
         this.lastUpdatedElement = document.getElementById('lastUpdated');
         this.tweetCountElement = document.getElementById('tweetCount');
         this.topicCountElement = document.getElementById('topicCount');
         this.engagementRateElement = document.getElementById('engagementRate');
+        this.insightsGrid = document.getElementById('insightsGrid');
+        this.activityTimeline = document.getElementById('activityTimeline');
         
         this.init();
     }
@@ -548,39 +526,169 @@ class ActivityLoader {
     }
 
     updateUI(data) {
-        // 要約テキストの更新
+        // Summary content update with modern styling
         if (this.summaryElement) {
-            this.summaryElement.innerHTML = this.formatSummary(data.summary);
+            this.summaryElement.innerHTML = this.formatModernSummary(data.summary);
             this.summaryElement.classList.add('updated');
             
-            // アニメーション後にクラスを削除
             setTimeout(() => {
                 this.summaryElement.classList.remove('updated');
             }, 600);
         }
 
-        // 最終更新時刻の更新
+        // Last updated with original data timestamp
         if (this.lastUpdatedElement && data.lastUpdated) {
             const updatedDate = new Date(data.lastUpdated);
             this.lastUpdatedElement.textContent = 
-                `最終更新: ${updatedDate.toLocaleDateString('ja-JP')} ${updatedDate.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' })}`;
+                `${updatedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} ${updatedDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}`;
         }
 
-        // 統計データの更新
+        // Enhanced stats update with animations
         if (data.stats) {
-            this.updateStats(data.stats);
+            this.updateModernStats(data.stats);
         }
 
-        // ハイライトの表示（もしあれば）
-        if (data.highlights && data.highlights.length > 0) {
-            this.showHighlights(data.highlights);
-        }
-
-        // Gemini 分析の詳細情報を表示
+        // Generate modern insights
         if (data.mood || data.technologies || data.achievements || data.focus_area) {
-            this.showGeminiDetails(data);
+            this.generateInsights(data);
+        }
+
+        // Create activity timeline
+        if (data.highlights && data.highlights.length > 0) {
+            this.createTimeline(data.highlights);
         }
     }
+
+    formatModernSummary(summary) {
+        if (!summary) {
+            return `
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Analyzing activities...</p>
+                </div>
+            `;
+        }
+        
+        const paragraphs = summary.split('\n').filter(p => p.trim().length > 0);
+        return `
+            <div class="summary-text">
+                ${paragraphs.map(p => `<p>${p.trim()}</p>`).join('')}
+            </div>
+        `;
+    }
+
+    updateModernStats(stats) {
+        const statItems = [
+            { element: this.tweetCountElement, value: stats.tweetCount || 0, max: 100 },
+            { element: this.topicCountElement, value: stats.topicCount || 0, max: 20 },
+            { element: this.engagementRateElement, value: stats.engagementRate || 0, max: 100, suffix: '%' }
+        ];
+
+        statItems.forEach((item, index) => {
+            if (item.element) {
+                setTimeout(() => {
+                    this.animateStatNumber(item.element, item.value, item.suffix);
+                    this.animateStatBar(item.element, item.value, item.max);
+                }, index * 200);
+            }
+        });
+    }
+
+    animateStatNumber(element, targetValue, suffix = '') {
+        const startValue = 0;
+        const duration = 1500;
+        const startTime = performance.now();
+
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.round(startValue + (targetValue - startValue) * easeOut);
+            
+            element.textContent = currentValue + suffix;
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+
+        requestAnimationFrame(animate);
+    }
+
+    animateStatBar(element, value, max) {
+        const card = element.closest('.stat-card');
+        if (card) {
+            const progressBar = card.querySelector('.stat-progress');
+            if (progressBar) {
+                const percentage = Math.min((value / max) * 100, 100);
+                setTimeout(() => {
+                    progressBar.style.width = `${percentage}%`;
+                }, 300);
+            }
+        }
+    }
+
+    generateInsights(data) {
+        if (!this.insightsGrid) return;
+
+        const insights = [];
+
+        if (data.focus_area) {
+            insights.push({
+                type: 'focus',
+                icon: 'fas fa-bullseye',
+                title: 'Current Focus',
+                content: data.focus_area,
+                color: 'var(--accent-color-1)'
+            });
+        }
+
+        if (data.mood) {
+            insights.push({
+                type: 'mood',
+                icon: 'fas fa-smile',
+                title: 'Overall Mood',
+                content: data.mood,
+                color: 'var(--accent-color-2)'
+            });
+        }
+
+        if (data.technologies && data.technologies.length > 0) {
+            insights.push({
+                type: 'tech',
+                icon: 'fas fa-code',
+                title: 'Technologies',
+                content: data.technologies.slice(0, 3).join(', '),
+                color: 'var(--accent-color-1)'
+            });
+        }
+
+        this.insightsGrid.innerHTML = insights.map(insight => `
+            <div class="insight-card" data-type="${insight.type}">
+                <div class="insight-icon" style="color: ${insight.color}">
+                    <i class="${insight.icon}"></i>
+                </div>
+                <div class="insight-content">
+                    <h4>${insight.title}</h4>
+                    <p>${insight.content}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    createTimeline(highlights) {
+        if (!this.activityTimeline) return;
+
+        this.activityTimeline.innerHTML = highlights.slice(0, 5).map((highlight, index) => `
+            <div class="timeline-item" style="animation-delay: ${index * 0.1}s">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <p>${highlight}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
 
     updateStats(stats) {
         if (this.tweetCountElement) {
@@ -768,7 +876,7 @@ class ActivityLoader {
     }
 }
 
-// DOMが読み込まれたらアクティビティローダーを初期化
+// DOMが読み込まれたらモダンダッシュボードを初期化
 document.addEventListener('DOMContentLoaded', () => {
     // 既存の初期化処理を維持
     if (typeof AOS !== 'undefined') {
@@ -779,8 +887,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // アクティビティローダーを初期化
+    // モダンアクティビティダッシュボードを初期化
     if (document.getElementById('summaryContent')) {
-        new ActivityLoader();
+        window.modernDashboard = new ModernActivityDashboard();
     }
 });
