@@ -94,6 +94,48 @@ button {
     outline: none;
 }
 
+/* Subtle frosted glass effect with visible borders */
+.liquidGlass-wrapper {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px) saturate(110%);
+    -webkit-backdrop-filter: blur(5px) saturate(110%);
+}
+
+/* Exclude contact items from glass effect */
+.contact-item.liquidGlass-wrapper {
+    border: none;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.liquidGlass-wrapper .liquidGlass-tint {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.liquidGlass-wrapper .liquidGlass-shine {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+        inset -1px -1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Enhance glass effect on hover */
+.liquidGlass-wrapper:hover {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+}
+
+.liquidGlass-wrapper:hover .liquidGlass-tint {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.liquidGlass-wrapper:hover .liquidGlass-shine {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4),
+        inset -1px -1px 0 rgba(255, 255, 255, 0.25);
+}
+
 /* ヘッダーとナビゲーション */
 header {
     height: 100vh;
@@ -2059,17 +2101,17 @@ footer {
 }
 
 .stat-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background-color: transparent;
     border-radius: 10px;
     padding: 20px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
     overflow: hidden;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    padding: 25px;
 }
 
 .stat-header {
@@ -2134,7 +2176,7 @@ footer {
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    padding: 25px;
 }
 
 .stat-header {
