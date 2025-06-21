@@ -321,29 +321,45 @@ header::before {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    min-height: 44px;
 }
 
 .cta-primary {
-    background-color: var(--accent-color-1);
+    background: rgba(100, 181, 246, 0.8);
     color: var(--bg-color);
+    border: 1px solid rgba(100, 181, 246, 0.6);
+    backdrop-filter: blur(5px) saturate(110%);
+    -webkit-backdrop-filter: blur(5px) saturate(110%);
 }
 
 .cta-primary:hover {
-    background-color: var(--hover-color);
+    background: rgba(66, 165, 245, 0.9);
+    border: 1px solid rgba(66, 165, 245, 0.8);
     transform: translateY(-3px);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .cta-secondary {
     border: 2px solid var(--accent-color-2);
     color: var(--accent-color-2);
-    background-color: transparent;
+    background: rgba(165, 214, 167, 0.05);
+    backdrop-filter: blur(5px) saturate(110%);
+    -webkit-backdrop-filter: blur(5px) saturate(110%);
 }
 
 .cta-secondary:hover {
-    background-color: var(--accent-color-2);
+    background: rgba(165, 214, 167, 0.9);
+    border: 2px solid var(--accent-color-2);
     color: var(--bg-color);
     transform: translateY(-3px);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
