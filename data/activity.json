@@ -1,113 +1,83 @@
 {
-  "summary": "過去15日間で、ネットワークエラーの原因調査と解決（Teredo活用）や、Linux環境構築への本格的な着手（vim、fcitx、ssh接続など）といった技術的課題に取り組みました。並行して、中学時代の友人の個人事業の手伝いや名刺作成、控除制度の調査といった自身の活動基盤を強化。また、ポートフォリオサイトの更新とGoogle Analytics登録、最新の生成AI技術（Deepsearch, Gemini APIなど）やGithub Actionsを用いた自動化にも積極的に関心を向け、学習と実践を深めています。",
+  "summary": "過去15日間で、AIモデルの活用効率化（Gemini CLIの検討、gemini2.5-flashの常用）や、Linux環境への移行とLaTeXの使用、Web開発におけるレスポンシブデザインの実装、そして技術記事の執筆といった多様な活動を行いました。新しい概念の学習を通じて技術的な課題解決に喜びを感じつつ、タスク管理ツールの選定にも取り組むなど、継続的な学習と技術改善に注力しています。",
   "highlights": [
-    "ナイトレインで発生したネットワークエラーをTeredoの有効化により解決しました。",
-    "GithubとのSSH接続を完了し、Linux環境構築に本格的に着手しています。",
-    "自身のポートフォリオサイトを更新し、Google Analyticsへの登録を完了しました。",
-    "家内労働者控除と学生控除の活用可能性を理解し、今後の活動における経済的な見通しを立てました。",
-    "Github Actions、X API、Gemini APIを活用したツイートの自動反映・統合の取り組みを開始しました。"
+    "同等の記事が見当たらなかったため、特定の技術記事を執筆した。",
+    "AIモデル選定において、推論速度に優れたgemini2.5-flashを常用し、効率的な活用を追求している。",
+    "既存のWebサイトにレスポンシブデザインの実装を完了した。",
+    "Linux環境へ移行し、開発ワークフローの一環としてLaTeXの使用を再開した。",
+    "新しい技術概念の学習が、開発上の課題解決に繋がる楽しさを実感している。"
   ],
   "topics": [
-    "ネットワーク技術と問題解決",
-    "Linux環境構築と開発環境整備",
-    "AI・生成AIの活用と研究",
-    "Webサイト開発と運用",
-    "個人活動とキャリア形成"
+    "AI/機械学習",
+    "Web開発",
+    "開発環境最適化",
+    "技術学習",
+    "生産性向上"
   ],
-  "mood": "ポジティブかつ意欲的",
+  "mood": "ポジティブ",
   "technologies": [
-    "Teredo",
-    "vim",
+    "Claude Code",
+    "Gemini CLI",
     "Linux",
-    "Github",
-    "fcitx",
-    "Google Analytics",
-    "WSL",
-    "Github Actions",
-    "Gemini API",
-    "Deepsearch"
+    "LaTeX",
+    "GPT-5",
+    "gemini2.5-flash",
+    "genspark",
+    "obsidian",
+    "notion",
+    "GPT-4o"
   ],
   "achievements": [
-    "Teredo有効化によるネットワークエラーの解決",
-    "GithubとのSSH接続完了",
-    "自身の名刺作成",
-    "家内労働者控除と学生控除の活用可能性を発見",
-    "ポートフォリオサイトの更新とGoogle Analyticsへの登録"
+    "同等の記事が見当たらなかった技術トピックに関する記事を執筆した。",
+    "既存のWebサイトにレスポンシブデザインの実装を完了し、ユーザー体験を向上させた。",
+    "自身に最適なAIモデルとしてgemini2.5-flashの常用を確立し、開発効率を高めた。"
   ],
-  "focus_area": "Linux環境の構築と活用、Webサイトの高度化、最新のAI技術を活用した開発への取り組み",
+  "focus_area": "AIモデルと開発環境の最適化、Webサイトの機能改善を通じた技術力の向上",
   "stats": {
-    "tweetCount": 22,
+    "tweetCount": 8,
     "topicCount": 5,
-    "engagementRate": 29
+    "engagementRate": 11
   },
   "rawTweets": [
     {
-      "id": "1934715477147963426",
-      "text": "このアカウントのポストは15日おきに自動で収集, 要約されるが, メタタグぽいものを付けといたら無視されるのか検証してみる.",
-      "created_at": "2025-06-16T20:51:29.000Z",
+      "id": "1939892455429874176",
+      "text": "https://t.co/zoAhMn5dqu\n同等の記事が見当たらなかったので書きました.",
+      "created_at": "2025-07-01T03:42:57.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
         "like_count": 0,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 5
+        "impression_count": 12
       },
       "context": []
     },
     {
-      "id": "1934715084783407577",
-      "text": "vimへの関心を持ち始めている.\n&lt;meta action=\"no-summary\" data-type=\"log-entry\" /&gt;",
-      "created_at": "2025-06-16T20:49:56.000Z",
+      "id": "1938566886167556488",
+      "text": "元々Claude Codeで雛形を作らせるとかはやっていたが, 勿体ない気もしていたので, Gemini CLIの使用用途はその辺りになりそう.",
+      "created_at": "2025-06-27T11:55:37.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
-        "like_count": 1,
+        "like_count": 2,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 8
+        "impression_count": 102
       },
       "context": []
     },
     {
-      "id": "1934712475678871899",
-      "text": "ナイトレインを友人と遊ぼうとしたところ, ネットワークエラーが発生し続けていたので, 原因を調査した.\n結局, Teredoを有効化することで解決しました.",
-      "created_at": "2025-06-16T20:39:34.000Z",
+      "id": "1938420030221521306",
+      "text": "Linuxにした事でOffice製品がブラウザでしか使えなくなった. 久しぶりにLaTeX触ってる.",
+      "created_at": "2025-06-27T02:12:03.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
-        "like_count": 1,
+        "like_count": 2,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 85
-      },
-      "context": []
-    },
-    {
-      "id": "1934711635991793781",
-      "text": "JANOG, ネットワークに対する知識が最も乏しい自信があるので不安ではある.\n少しでも学ばなければ.",
-      "created_at": "2025-06-16T20:36:13.000Z",
-      "metrics": {
-        "retweet_count": 0,
-        "reply_count": 0,
-        "like_count": 0,
-        "quote_count": 0,
-        "bookmark_count": 0,
-        "impression_count": 9
-      },
-      "context": []
-    },
-    {
-      "id": "1934711398690701414",
-      "text": "https://t.co/TgJwTXedzm\n中学時代の友人が個人事業主になったので, ちょっとお手伝いすることになりました.",
-      "created_at": "2025-06-16T20:35:17.000Z",
-      "metrics": {
-        "retweet_count": 0,
-        "reply_count": 0,
-        "like_count": 0,
-        "quote_count": 0,
-        "bookmark_count": 0,
-        "impression_count": 7
+        "impression_count": 49
       },
       "context": [
         {
@@ -117,9 +87,21 @@
             "description": "Categories within Brand Verticals that narrow down the scope of Brands"
           },
           "entity": {
-            "id": "1557696848252391426",
-            "name": "Financial Services Business",
-            "description": "Brands, companies, advertisers and every non-person handle with the profit intent related to Banks, Credit cards, Insurance, Investments, Stocks "
+            "id": "1557697333571112960",
+            "name": "Technology Business",
+            "description": "Brands, companies, advertisers and every non-person handle with the profit intent related to softwares, apps, communication equipments, hardwares"
+          }
+        },
+        {
+          "domain": {
+            "id": "30",
+            "name": "Entities [Entity Service]",
+            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
+          },
+          "entity": {
+            "id": "848920371311001600",
+            "name": "Technology",
+            "description": "Technology and computing"
           }
         },
         {
@@ -129,9 +111,9 @@
             "description": "A grouping of interests and hobbies entities, like Novelty Food or Destinations"
           },
           "entity": {
-            "id": "857878891611865089",
-            "name": "Small business",
-            "description": "Small business"
+            "id": "848959431836487680",
+            "name": "Linux",
+            "description": "Linux"
           }
         },
         {
@@ -141,47 +123,42 @@
             "description": "A taxonomy of user interests. "
           },
           "entity": {
-            "id": "781974596148793345",
-            "name": "Business & finance"
-          }
-        },
-        {
-          "domain": {
-            "id": "131",
-            "name": "Unified Twitter Taxonomy",
-            "description": "A taxonomy of user interests. "
-          },
-          "entity": {
-            "id": "857878891611865089",
-            "name": "Small business",
-            "description": "Small business"
-          }
-        },
-        {
-          "domain": {
-            "id": "131",
-            "name": "Unified Twitter Taxonomy",
-            "description": "A taxonomy of user interests. "
-          },
-          "entity": {
-            "id": "1503733786608955394",
-            "name": "Small and medium-sized business"
-          }
-        },
-        {
-          "domain": {
-            "id": "131",
-            "name": "Unified Twitter Taxonomy",
-            "description": "A taxonomy of user interests. "
-          },
-          "entity": {
-            "id": "1584573725449408513",
-            "name": "Businesses by size"
+            "id": "848959431836487680",
+            "name": "Linux",
+            "description": "Linux"
           }
         }
       ]
+    },
+    {
+      "id": "1937687373539856833",
+      "text": "GPT-5, 出力までの時間が早いといいな.\n最近のモデルは推論型ばっかり&amp;4oだと物足りないので, gemini2.5-flashばっかり使ってる. https://t.co/7PNGcOHuma",
+      "created_at": "2025-06-25T01:40:44.000Z",
+      "metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 174
+      },
+      "context": []
+    },
+    {
+      "id": "1937685362945720492",
+      "text": "genspark, 話題になる度に触ろうとして断念してる.",
+      "created_at": "2025-06-25T01:32:45.000Z",
+      "metrics": {
+        "retweet_count": 0,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 44
+      },
+      "context": []
     }
   ],
-  "lastUpdated": "2025-06-16T23:13:51.451Z",
+  "lastUpdated": "2025-07-01T23:13:58.373Z",
   "generatedBy": "GitHub Actions (Gemini AI)"
 }
