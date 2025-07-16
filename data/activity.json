@@ -1,85 +1,96 @@
 {
-  "summary": "過去15日間で、AIモデルの活用効率化（Gemini CLIの検討、gemini2.5-flashの常用）や、Linux環境への移行とLaTeXの使用、Web開発におけるレスポンシブデザインの実装、そして技術記事の執筆といった多様な活動を行いました。新しい概念の学習を通じて技術的な課題解決に喜びを感じつつ、タスク管理ツールの選定にも取り組むなど、継続的な学習と技術改善に注力しています。",
+  "summary": "過去15日間で、多岐にわたる技術的な学習と実践に取り組んでいます。特に、Raspberry Piを用いたVNC/SSH接続や赤外線通信の送受信機能の実装を進め、Android 15を搭載したPixel 8 Proでのターミナル操作も試しました。Google Cloud Next Tokyoへの参加を通じて最新のクラウド技術にも触れ、AWS資格取得への意欲も高まっています。また、Git/GitHubの理解を深める有益な情報に出会うなど、開発効率向上にも努めています。",
   "highlights": [
-    "同等の記事が見当たらなかったため、特定の技術記事を執筆した。",
-    "AIモデル選定において、推論速度に優れたgemini2.5-flashを常用し、効率的な活用を追求している。",
-    "既存のWebサイトにレスポンシブデザインの実装を完了した。",
-    "Linux環境へ移行し、開発ワークフローの一環としてLaTeXの使用を再開した。",
-    "新しい技術概念の学習が、開発上の課題解決に繋がる楽しさを実感している。"
+    "Raspberry PiでのVNC/SSH接続および赤外線通信の送受信機能の実装に成功。",
+    "Android 15 (Pixel 8 Pro)環境におけるターミナル操作の試行と検証を実施。",
+    "Google Cloud Next Tokyoへの参加を表明し、最新のクラウド技術動向に触れる意欲を示す。",
+    "Git/GitHubの効率的な利用を促進する有用な学習リソースを発見。",
+    "COMアドインやレスポンシブデザインといったWeb・ソフトウェア開発関連の知識習得に意欲を見せる。"
   ],
   "topics": [
-    "AI/機械学習",
-    "Web開発",
-    "開発環境最適化",
-    "技術学習",
-    "生産性向上"
+    "IoT/組み込み開発",
+    "クラウドコンピューティング",
+    "Web開発/UIUX",
+    "開発ツール/バージョン管理",
+    "モバイル開発"
   ],
-  "mood": "ポジティブ",
+  "mood": "非常に意欲的で、多岐にわたる技術領域への探求心に満ちている",
   "technologies": [
-    "Claude Code",
-    "Gemini CLI",
-    "Linux",
-    "LaTeX",
-    "GPT-5",
-    "gemini2.5-flash",
-    "genspark",
-    "obsidian",
-    "notion",
-    "GPT-4o"
+    "Raspberry Pi",
+    "Android 15",
+    "Pixel 8 Pro",
+    "VNC",
+    "SSH",
+    "Git",
+    "GitHub",
+    "Google Cloud",
+    "AWS",
+    "Blender"
   ],
   "achievements": [
-    "同等の記事が見当たらなかった技術トピックに関する記事を執筆した。",
-    "既存のWebサイトにレスポンシブデザインの実装を完了し、ユーザー体験を向上させた。",
-    "自身に最適なAIモデルとしてgemini2.5-flashの常用を確立し、開発効率を高めた。"
+    "Raspberry Pi上でVNC/SSH接続および赤外線通信の送受信機能の実装を達成。",
+    "Android 15 (Pixel 8 Pro)環境でのターミナル操作の試行を通じたモバイル環境への理解深化。",
+    "Git/GitHubの学習に役立つ優れたスライド資料を発見し、効率的な学習経路を確立。"
   ],
-  "focus_area": "AIモデルと開発環境の最適化、Webサイトの機能改善を通じた技術力の向上",
+  "focus_area": "多角的な技術学習と実践、特にIoT/組み込み開発、モバイル環境の探求、およびクラウド技術へのキャッチアップ",
   "stats": {
-    "tweetCount": 8,
+    "tweetCount": 12,
     "topicCount": 5,
-    "engagementRate": 11
+    "engagementRate": 16
   },
   "rawTweets": [
     {
-      "id": "1939892455429874176",
-      "text": "https://t.co/zoAhMn5dqu\n同等の記事が見当たらなかったので書きました.",
-      "created_at": "2025-07-01T03:42:57.000Z",
+      "id": "1945460445131006396",
+      "text": "できました. https://t.co/dESiDlx4M9",
+      "created_at": "2025-07-16T12:28:09.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
         "like_count": 0,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 12
+        "impression_count": 9
       },
       "context": []
     },
     {
-      "id": "1938566886167556488",
-      "text": "元々Claude Codeで雛形を作らせるとかはやっていたが, 勿体ない気もしていたので, Gemini CLIの使用用途はその辺りになりそう.",
-      "created_at": "2025-06-27T11:55:37.000Z",
+      "id": "1944844870348366250",
+      "text": "積み立てNISAとかした方がいいんだろうけど手をつけれていない.",
+      "created_at": "2025-07-14T19:42:05.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
-        "like_count": 2,
+        "like_count": 0,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 102
+        "impression_count": 45
       },
       "context": []
     },
     {
-      "id": "1938420030221521306",
-      "text": "Linuxにした事でOffice製品がブラウザでしか使えなくなった. 久しぶりにLaTeX触ってる.",
-      "created_at": "2025-06-27T02:12:03.000Z",
+      "id": "1944844483411243156",
+      "text": "Google Cloud Next Tokyoに参加させていただきます. よろしくお願いします https://t.co/3xPd5RcHXA",
+      "created_at": "2025-07-14T19:40:32.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
-        "like_count": 2,
+        "like_count": 0,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 49
+        "impression_count": 25
       },
       "context": [
+        {
+          "domain": {
+            "id": "30",
+            "name": "Entities [Entity Service]",
+            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
+          },
+          "entity": {
+            "id": "781974596752842752",
+            "name": "Services"
+          }
+        },
         {
           "domain": {
             "id": "46",
@@ -94,26 +105,24 @@
         },
         {
           "domain": {
-            "id": "30",
-            "name": "Entities [Entity Service]",
-            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
+            "id": "47",
+            "name": "Brand",
+            "description": "Brands and Companies"
           },
           "entity": {
-            "id": "848920371311001600",
-            "name": "Technology",
-            "description": "Technology and computing"
+            "id": "10026378521",
+            "name": "Google "
           }
         },
         {
           "domain": {
-            "id": "66",
-            "name": "Interests and Hobbies Category",
-            "description": "A grouping of interests and hobbies entities, like Novelty Food or Destinations"
+            "id": "48",
+            "name": "Product",
+            "description": "Products created by Brands.  Examples: Ford Explorer, Apple iPhone."
           },
           "entity": {
-            "id": "848959431836487680",
-            "name": "Linux",
-            "description": "Linux"
+            "id": "1395474411180892160",
+            "name": "Google brand conversation"
           }
         },
         {
@@ -123,42 +132,97 @@
             "description": "A taxonomy of user interests. "
           },
           "entity": {
-            "id": "848959431836487680",
-            "name": "Linux",
-            "description": "Linux"
+            "id": "10026378521",
+            "name": "Google "
+          }
+        },
+        {
+          "domain": {
+            "id": "131",
+            "name": "Unified Twitter Taxonomy",
+            "description": "A taxonomy of user interests. "
+          },
+          "entity": {
+            "id": "1436053202835689485",
+            "name": "Events"
+          }
+        },
+        {
+          "domain": {
+            "id": "30",
+            "name": "Entities [Entity Service]",
+            "description": "Entity Service top level domain, every item that is in Entity Service should be in this domain"
+          },
+          "entity": {
+            "id": "781974596752842752",
+            "name": "Services"
+          }
+        },
+        {
+          "domain": {
+            "id": "47",
+            "name": "Brand",
+            "description": "Brands and Companies"
+          },
+          "entity": {
+            "id": "10026378521",
+            "name": "Google "
+          }
+        },
+        {
+          "domain": {
+            "id": "48",
+            "name": "Product",
+            "description": "Products created by Brands.  Examples: Ford Explorer, Apple iPhone."
+          },
+          "entity": {
+            "id": "10043701964",
+            "name": "Google Cloud"
+          }
+        },
+        {
+          "domain": {
+            "id": "156",
+            "name": "Cities",
+            "description": "Cities around the world"
+          },
+          "entity": {
+            "id": "855095546553393152",
+            "name": "Tokyo",
+            "description": "Tokyo"
           }
         }
       ]
     },
     {
-      "id": "1937687373539856833",
-      "text": "GPT-5, 出力までの時間が早いといいな.\n最近のモデルは推論型ばっかり&amp;4oだと物足りないので, gemini2.5-flashばっかり使ってる. https://t.co/7PNGcOHuma",
-      "created_at": "2025-06-25T01:40:44.000Z",
+      "id": "1944785118264201365",
+      "text": "今の10~20代で生成AI多用してる層, 小中学生のときに安心フィルター突破してそう.",
+      "created_at": "2025-07-14T15:44:39.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
         "like_count": 0,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 174
+        "impression_count": 19
       },
       "context": []
     },
     {
-      "id": "1937685362945720492",
-      "text": "genspark, 話題になる度に触ろうとして断念してる.",
-      "created_at": "2025-06-25T01:32:45.000Z",
+      "id": "1944712727148310908",
+      "text": "Android15, Pixel8proでターミナルを触ってみる https://t.co/nuuIkJ17Ae",
+      "created_at": "2025-07-14T10:56:59.000Z",
       "metrics": {
         "retweet_count": 0,
         "reply_count": 0,
         "like_count": 0,
         "quote_count": 0,
         "bookmark_count": 0,
-        "impression_count": 44
+        "impression_count": 34
       },
       "context": []
     }
   ],
-  "lastUpdated": "2025-07-01T23:13:58.373Z",
+  "lastUpdated": "2025-07-16T23:15:08.493Z",
   "generatedBy": "GitHub Actions (Gemini AI)"
 }
