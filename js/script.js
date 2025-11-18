@@ -65,11 +65,6 @@ if (typingContainer && typingCursor) {
     setTimeout(typeText, 500);
 }
 
-
-
-
-
-
 // プロジェクトのフィルタリング
 function filterProjects(category) {
     projectCards.forEach(card => {
