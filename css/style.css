@@ -15,6 +15,11 @@
     --success-color: #4CAF50;
     --warning-color: #FFC107;
     --error-color: #F44336;
+    --github-link-size: 48px;
+    --github-link-radius: 12px;
+    --github-icon-size: 1.2rem;
+    --title-github-gap: 16px;
+    --title-github-icon-size: 1.8rem;
 }
 
 /* 基本スタイル */
@@ -92,6 +97,112 @@ section {
 button {
     border: none;
     outline: none;
+}
+
+/* GitHubリンクの共通スタイルを集約 */
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--github-link-size);
+    height: var(--github-link-size);
+    border-radius: var(--github-link-radius);
+    background: var(--card-bg);
+    color: var(--primary-text);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.github-link i {
+    font-size: var(--github-icon-size);
+}
+
+.github-link:hover {
+    background: var(--accent-color-1);
+    color: var(--bg-color);
+    transform: translateY(-2px);
+}
+
+.title-github-link {
+    display: inline-flex;
+    align-items: center;
+    margin-left: var(--title-github-gap);
+    color: var(--secondary-text);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    vertical-align: middle;
+}
+
+.title-github-link:hover {
+    color: var(--accent-color-1);
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.title-github-link i {
+    font-size: var(--title-github-icon-size);
+}
+
+/* GitHubリンクのサイズトークンをまとめて管理 */
+@media screen and (max-width: 1199px) {
+    :root {
+        --github-link-size: 44px;
+        --github-link-radius: 10px;
+        --github-icon-size: 1.1rem;
+        --title-github-gap: 16px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    :root {
+        --github-link-size: 46px;
+        --github-link-radius: 11px;
+        --github-icon-size: 1.15rem;
+        --title-github-gap: 12px;
+        --title-github-icon-size: 1.6rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --github-link-size: 44px;
+        --github-link-radius: 10px;
+        --github-icon-size: 1.1rem;
+        --title-github-gap: 8px;
+        --title-github-icon-size: 1.2rem;
+    }
+
+    /* タッチデバイスでの挙動調整 */
+    .title-github-link {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .title-github-link:hover {
+        transform: none;
+    }
+
+    .title-github-link:active {
+        transform: scale(0.95);
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    :root {
+        --github-link-size: 40px;
+        --github-link-radius: 8px;
+        --github-icon-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    :root {
+        --github-link-size: 32px;
+        --github-link-radius: 6px;
+        --github-icon-size: 0.8rem;
+        --title-github-gap: 8px;
+    }
 }
 
 /* Subtle frosted glass effect with visible borders */
@@ -1045,16 +1156,6 @@ footer {
         gap: 30px;
     }
     
-    /* GitHub Minimal - Tablet Responsive */
-    .github-link {
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-    }
-    
-    .github-link i {
-        font-size: 1.1rem;
-    }
 }
 
 /* モバイル (576px-767px) */
@@ -1211,16 +1312,6 @@ footer {
         margin-right: 0;
     }
     
-    /* GitHub Minimal - Mobile Responsive */
-    .github-link {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-    }
-    
-    .github-link i {
-        font-size: 1rem;
-    }
 }
 
 /* 小型モバイル (575px以下) */
@@ -1247,15 +1338,6 @@ footer {
     .ai-disclaimer {
         font-size: 0.7rem;
         padding: 4px 8px;
-    }
-    
-    /* Title GitHub Link - Small Mobile */
-    .title-github-link {
-        margin-left: 6px;
-    }
-    
-    .title-github-link i {
-        font-size: 1.1rem;
     }
     
     /* Section Info - Small Mobile Responsive */
@@ -1327,16 +1409,6 @@ footer {
     }
     
     .header-text h3, .header-text h4 {
-        font-size: 0.9rem;
-    }
-    
-    .github-link {
-        width: 36px;
-        height: 36px;
-        border-radius: 6px;
-    }
-    
-    .github-link i {
         font-size: 0.9rem;
     }
     
@@ -1422,16 +1494,6 @@ footer {
         font-size: 0.85rem;
     }
     
-    /* GitHub Minimal - Small Mobile Responsive */
-    .github-link {
-        width: 36px;
-        height: 36px;
-        border-radius: 6px;
-    }
-    
-    .github-link i {
-        font-size: 0.9rem;
-    }
 }
 
 /* 極小デバイス（360px以下） */
@@ -1458,15 +1520,6 @@ footer {
     .ai-disclaimer {
         font-size: 0.65rem;
         padding: 3px 6px;
-    }
-    
-    /* Title GitHub Link - Extra Small Mobile */
-    .title-github-link {
-        margin-left: 4px;
-    }
-    
-    .title-github-link i {
-        font-size: 1rem;
     }
     
     /* Section Info - Extra Small Mobile Responsive */
@@ -1544,16 +1597,6 @@ footer {
     .header-text .period-badge {
         font-size: 0.6rem;
         padding: 2px 6px;
-    }
-    
-    .github-link {
-        width: 32px;
-        height: 32px;
-        border-radius: 6px;
-    }
-    
-    .github-link i {
-        font-size: 0.8rem;
     }
     
     .hero h1 {
@@ -1946,28 +1989,6 @@ footer {
     background: transparent;
     padding: 100px 0;
     overflow: hidden;
-}
-
-/* GitHub link in section title */
-.title-github-link {
-    display: inline-flex;
-    align-items: center;
-    margin-left: 16px;
-    color: var(--secondary-text);
-    text-decoration: none;
-    opacity: 0.6;
-    transition: all 0.3s ease;
-    vertical-align: middle;
-}
-
-.title-github-link:hover {
-    color: var(--accent-color-1);
-    opacity: 1;
-    transform: translateY(-1px);
-}
-
-.title-github-link i {
-    font-size: 1.8rem;
 }
 
 /* Section Description Card */
@@ -2487,17 +2508,6 @@ footer {
         height: 28px;
     }
     
-    /* GitHub Minimal - Large Tablet Responsive */
-    .github-link {
-        width: 46px;
-        height: 46px;
-        border-radius: 11px;
-    }
-    
-    .github-link i {
-        font-size: 1.15rem;
-    }
-    
     .activities-dashboard {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -2599,14 +2609,6 @@ footer {
         margin-bottom: 14px;
     }
     
-    /* Title GitHub Link - Large Tablet */
-    .title-github-link {
-        margin-left: 12px;
-    }
-    
-    .title-github-link i {
-        font-size: 1.6rem;
-    }
 }
 
 @media screen and (max-width: 768px) {
@@ -2749,16 +2751,6 @@ footer {
     }
     
     .header-text h3, .header-text h4 {
-        font-size: 1.1rem;
-    }
-    
-    .github-link {
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-    }
-    
-    .github-link i {
         font-size: 1.1rem;
     }
     
@@ -2927,14 +2919,6 @@ footer {
         font-size: 0.7rem;
     }
     
-    /* Title GitHub Link - Tablet */
-    .title-github-link {
-        margin-left: 10px;
-    }
-    
-    .title-github-link i {
-        font-size: 1.4rem;
-    }
 }
 
 @media screen and (max-width: 480px) {
@@ -3049,16 +3033,6 @@ footer {
     .header-text .period-badge {
         font-size: 0.7rem;
         padding: 3px 8px;
-    }
-    
-    .github-link {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-    }
-    
-    .github-link i {
-        font-size: 1rem;
     }
     
     .hero-title {
@@ -3253,25 +3227,6 @@ footer {
         font-size: 0.65rem;
     }
     
-    /* Title GitHub Link - Mobile */
-    .title-github-link {
-        margin-left: 8px;
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: transparent;
-    }
-    
-    .title-github-link i {
-        font-size: 1.2rem;
-    }
-    
-    .title-github-link:hover {
-        transform: none;
-    }
-    
-    .title-github-link:active {
-        transform: scale(0.95);
-        opacity: 1;
-    }
 }
 
 /* Activity Loading Animation */
