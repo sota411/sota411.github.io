@@ -1,12 +1,12 @@
 // Liquid Glass Effect Application Script
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     // Add the SVG filter for glass distortion if it doesn't exist
     function addGlassFilter() {
         if (document.getElementById('glass-distortion')) {
             return;
         }
-        
+
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.style.display = 'none';
         svg.innerHTML = `
@@ -61,14 +61,14 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         document.body.appendChild(svg);
     }
-    
+
     // Function to wrap elements with liquid glass structure
     function applyLiquidGlass(element) {
         // Skip if already has liquid glass
         if (element.classList.contains('liquidGlass-wrapper') || element.querySelector('.liquidGlass-effect')) {
             return;
         }
-        
+
         // Store original content and computed styles
         const originalContent = element.innerHTML;
         const computedStyle = window.getComputedStyle(element);
@@ -76,14 +76,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const originalFlexDirection = computedStyle.flexDirection;
         const originalAlignItems = computedStyle.alignItems;
         const originalJustifyContent = computedStyle.justifyContent;
-        
+
         // Remove background to allow glass effect to show
         element.style.backgroundColor = 'transparent';
         element.style.background = 'transparent';
-        
+
         // Add liquid glass wrapper class (preserve existing classes)
         element.classList.add('liquidGlass-wrapper');
-        
+
         // Create liquid glass structure
         element.innerHTML = `
             <div class="liquidGlass-effect"></div>
@@ -103,44 +103,72 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
-    
+
     // Initialize glass filter
     addGlassFilter();
-    
-    // Skip header navigation - keep original styling
 
     // Apply liquid glass to different card types (excluding contact-item)
     const selectors = [
         '.certification-item',
-        '.skill-item', 
+        '.skill-item',
         '.project-card',
         '.dashboard-card',
         '.stat-card',
         '.section-description-card',
         '.insight-card',
-        '.internship-card'
+        '.internship-card',
+        '.news-item',
+        '.news-article'
     ];
-    
-    selectors.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(element => {
-            // Only apply if element doesn't already have liquid glass structure
-            if (!element.querySelector('.liquidGlass-effect')) {
-                applyLiquidGlass(element);
-            }
+
+    function applyToSelectors() {
+        selectors.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                // Only apply if element doesn't already have liquid glass structure
+                if (!element.querySelector('.liquidGlass-effect')) {
+                    applyLiquidGlass(element);
+                }
+            });
+        });
+    }
+
+    // Apply to existing elements
+    applyToSelectors();
+
+    // Set up MutationObserver to watch for dynamically added elements
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+                // Check if the added node itself matches our selectors
+                if (node.nodeType === 1) { // Element node
+                    selectors.forEach(selector => {
+                        if (node.matches && node.matches(selector)) {
+                            if (!node.querySelector('.liquidGlass-effect')) {
+                                applyLiquidGlass(node);
+                            }
+                        }
+                    });
+
+                    // Also check child elements
+                    selectors.forEach(selector => {
+                        const elements = node.querySelectorAll ? node.querySelectorAll(selector) : [];
+                        elements.forEach(element => {
+                            if (!element.querySelector('.liquidGlass-effect')) {
+                                applyLiquidGlass(element);
+                            }
+                        });
+                    });
+                }
+            });
         });
     });
-    
-    // Note: internship-card is now handled in the main selectors loop above
-    
-    console.log('Liquid glass effects applied to portfolio cards');
-    
-    // Debug: Log which elements were found and processed
-    selectors.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        console.log(`Found ${elements.length} elements for selector: ${selector}`);
-        elements.forEach((element, index) => {
-            console.log(`  - Element ${index + 1}:`, element.classList.toString());
-        });
+
+    // Start observing the document body for changes
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
     });
+
+    console.log('Liquid glass effects applied to portfolio cards with MutationObserver');
 });

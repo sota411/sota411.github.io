@@ -101,10 +101,10 @@ function animateOnScroll() {
         if (!section.classList.contains('fade-in')) {
             section.classList.add('fade-in');
         }
-        
+
         const sectionTop = section.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
-        
+
         if (sectionTop < windowHeight * 0.85) {
             section.classList.add('active');
         }
@@ -123,7 +123,7 @@ window.addEventListener('load', () => {
             }, 500);
         }, 1000);
     }
-    
+
     document.querySelectorAll('.skill-progress').forEach(bar => {
         const width = bar.style.width;
         bar.style.width = '0';
@@ -131,9 +131,9 @@ window.addEventListener('load', () => {
             bar.style.width = width;
         }, 500);
     });
-    
+
     animateOnScroll();
-    
+
     // インターンシップセクションのアニメーション
     const internshipCard = document.querySelector('.internship-card');
     if (internshipCard) {
@@ -144,7 +144,7 @@ window.addEventListener('load', () => {
             internshipCard.style.transform = 'translateY(0)';
         }, 300);
     }
-    
+
     // 画像の遅延読み込み設定
     const lazyImages = document.querySelectorAll('img[data-src]');
     if ('IntersectionObserver' in window) {
@@ -158,7 +158,7 @@ window.addEventListener('load', () => {
                 }
             });
         });
-        
+
         lazyImages.forEach(img => {
             imageObserver.observe(img);
         });
@@ -176,11 +176,11 @@ window.addEventListener('scroll', animateOnScroll);
 
 // ヒーローセクションのタイピングエフェクト（オプション）
 const heroTitle = document.querySelector('.hero h1');
-const heroText = heroTitle.textContent;
-if (heroTitle && heroText && false) { // デフォルトで無効、有効にする場合はtrueに設定
+if (heroTitle && false) { // デフォルトで無効、有効にする場合はtrueに設定
+    const heroText = heroTitle.textContent;
     heroTitle.textContent = '';
     let charIndex = 0;
-    
+
     function typeWriter() {
         if (charIndex < heroText.length) {
             heroTitle.textContent += heroText.charAt(charIndex);
@@ -188,7 +188,7 @@ if (heroTitle && heroText && false) { // デフォルトで無効、有効にす
             setTimeout(typeWriter, 150);
         }
     }
-    
+
     typeWriter();
 }
 
@@ -208,14 +208,14 @@ document.addEventListener('DOMContentLoaded', () => {
         burger.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             burger.classList.toggle('toggle');
-            
+
             // ボディのスクロールを制御
             if (navMenu.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
             } else {
                 document.body.style.overflow = '';
             }
-            
+
             // リンクのアニメーション
             const menuItems = navMenu.querySelectorAll('li');
             menuItems.forEach((item, index) => {
@@ -472,7 +472,7 @@ class ModernActivityDashboard {
         this.engagementRateElement = document.getElementById('engagementRate');
         this.insightsGrid = document.getElementById('insightsGrid');
         this.activityTimeline = document.getElementById('activityTimeline');
-        
+
         this.init();
     }
 
@@ -493,7 +493,7 @@ class ModernActivityDashboard {
             // const isGitHubPages = window.location.hostname === 'sota411.github.io' || 
             //                      window.location.hostname.includes('github.io') ||
             //                      !window.location.hostname.includes('localhost');
-            
+
             let response;
             // if (isGitHubPages) {
             //     // 静的ファイルから読み込み
@@ -502,18 +502,18 @@ class ModernActivityDashboard {
             //     // ローカル環境ではAPIから読み込み
             //     response = await fetch('/api/activity');
             // }
-            
+
             // キャッシュバスティングのためタイムスタンプを追加
             const timestamp = new Date().getTime();
             response = await fetch(`./data/activity.json?t=${timestamp}`); // 常に静的ファイルから読み込む
-            
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
+
             const data = await response.json();
             this.updateUI(data);
-            
+
         } catch (error) {
             console.error('アクティビティ読み込みエラー:', error);
             this.showError();
@@ -525,7 +525,7 @@ class ModernActivityDashboard {
         if (this.summaryElement) {
             this.summaryElement.innerHTML = this.formatModernSummary(data.summary);
             this.summaryElement.classList.add('updated');
-            
+
             setTimeout(() => {
                 this.summaryElement.classList.remove('updated');
             }, 600);
@@ -534,7 +534,7 @@ class ModernActivityDashboard {
         // Last updated with original data timestamp
         if (this.lastUpdatedElement && data.lastUpdated) {
             const updatedDate = new Date(data.lastUpdated);
-            this.lastUpdatedElement.textContent = 
+            this.lastUpdatedElement.textContent =
                 `${updatedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} ${updatedDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}`;
         }
 
@@ -563,7 +563,7 @@ class ModernActivityDashboard {
                 </div>
             `;
         }
-        
+
         const paragraphs = summary.split('\n').filter(p => p.trim().length > 0);
         return `
             <div class="summary-text">
@@ -599,7 +599,7 @@ class ModernActivityDashboard {
             const progress = Math.min(elapsed / duration, 1);
             const easeOut = 1 - Math.pow(1 - progress, 3);
             const currentValue = Math.round(startValue + (targetValue - startValue) * easeOut);
-            
+
             element.textContent = currentValue + suffix;
 
             if (progress < 1) {
@@ -707,11 +707,11 @@ class ModernActivityDashboard {
         const animate = (currentTime) => {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            
+
             // イージング関数（easeOutCubic）
             const easeOut = 1 - Math.pow(1 - progress, 3);
             const currentValue = Math.round(startValue + (targetValue - startValue) * easeOut);
-            
+
             element.textContent = currentValue + suffix;
 
             if (progress < 1) {
@@ -724,7 +724,7 @@ class ModernActivityDashboard {
 
     formatSummary(summary) {
         if (!summary) return '<p class="loading-message">アクティビティを読み込み中...</p>';
-        
+
         // 文章を段落に分割
         const paragraphs = summary.split('\n').filter(p => p.trim().length > 0);
         return paragraphs.map(p => `<p>${p.trim()}</p>`).join('');
@@ -742,13 +742,13 @@ class ModernActivityDashboard {
                     </ul>
                 </div>
             `;
-            
+
             // 既存のハイライトを削除
             const existingHighlights = summaryContent.querySelector('.activity-highlights');
             if (existingHighlights) {
                 existingHighlights.remove();
             }
-            
+
             summaryContent.insertAdjacentHTML('beforeend', highlightsHtml);
         }
     }
@@ -756,15 +756,15 @@ class ModernActivityDashboard {
     showGeminiDetails(data) {
         // Gemini分析の詳細情報を表示する要素を作成
         let detailsContainer = document.querySelector('.gemini-details');
-        
+
         if (!detailsContainer) {
             detailsContainer = document.createElement('div');
             detailsContainer.className = 'gemini-details';
             this.summaryElement.parentElement.appendChild(detailsContainer);
         }
-        
+
         let detailsHtml = '<div class="gemini-analysis-header"><h4><i class="fas fa-robot"></i> AI分析結果</h4></div>';
-        
+
         // 注力分野
         if (data.focus_area) {
             detailsHtml += `
@@ -779,7 +779,7 @@ class ModernActivityDashboard {
                 </div>
             `;
         }
-        
+
         // 全体的な雰囲気
         if (data.mood) {
             const moodIcon = this.getMoodIcon(data.mood);
@@ -795,7 +795,7 @@ class ModernActivityDashboard {
                 </div>
             `;
         }
-        
+
         // 使用技術
         if (data.technologies && data.technologies.length > 0) {
             detailsHtml += `
@@ -806,15 +806,15 @@ class ModernActivityDashboard {
                     </div>
                     <div class="item-content">
                         <div class="tech-tags">
-                            ${data.technologies.map(tech => 
-                                `<span class="tech-tag">${tech}</span>`
-                            ).join('')}
+                            ${data.technologies.map(tech =>
+                `<span class="tech-tag">${tech}</span>`
+            ).join('')}
                         </div>
                     </div>
                 </div>
             `;
         }
-        
+
         // 具体的な成果
         if (data.achievements && data.achievements.length > 0) {
             detailsHtml += `
@@ -825,21 +825,21 @@ class ModernActivityDashboard {
                     </div>
                     <div class="item-content">
                         <ul class="achievements-list">
-                            ${data.achievements.map(achievement => 
-                                `<li class="achievement-item">${achievement}</li>`
-                            ).join('')}
+                            ${data.achievements.map(achievement =>
+                `<li class="achievement-item">${achievement}</li>`
+            ).join('')}
                         </ul>
                     </div>
                 </div>
             `;
         }
-        
+
         detailsContainer.innerHTML = detailsHtml;
-        
+
         // アニメーション効果を追加
         detailsContainer.classList.add('fade-in');
     }
-    
+
     getMoodIcon(mood) {
         const moodIcons = {
             'ポジティブ': 'fas fa-smile',
@@ -886,4 +886,213 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('summaryContent')) {
         window.modernDashboard = new ModernActivityDashboard();
     }
+});
+
+// News Manager
+class NewsManager {
+    constructor() {
+        this.newsListHome = document.getElementById('newsListHome');
+        this.newsListFull = document.getElementById('newsListFull');
+        this.newsArticle = document.getElementById('newsArticle');
+        this.breadcrumbTitle = document.getElementById('breadcrumbTitle');
+
+        this.init();
+    }
+
+    async init() {
+        // Check which page we are on
+        if (this.newsListHome) {
+            await this.loadNews('home');
+        } else if (this.newsListFull) {
+            await this.loadNews('full');
+        } else if (this.newsArticle) {
+            await this.loadArticle();
+        }
+    }
+
+    async fetchNewsData() {
+        try {
+            const response = await fetch('news/index.json');
+            if (!response.ok) {
+                throw new Error('Failed to fetch news data');
+            }
+            const data = await response.json();
+            // Sort by date descending
+            return data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        } catch (error) {
+            console.error('Error fetching news data:', error);
+            return [];
+        }
+    }
+
+    async loadNews(mode) {
+        const newsData = await this.fetchNewsData();
+        const container = mode === 'home' ? this.newsListHome : this.newsListFull;
+
+        if (newsData.length === 0) {
+            container.innerHTML = '<p class="no-news">No news available.</p>';
+            return;
+        }
+
+        // For home page, limit to 3 items
+        const displayData = mode === 'home' ? newsData.slice(0, 3) : newsData;
+
+        // Check if "Show More" button should be visible on home page
+        if (mode === 'home') {
+            const showMoreBtn = document.querySelector('.news-more');
+            if (showMoreBtn) {
+                showMoreBtn.style.display = newsData.length > 3 ? 'block' : 'none';
+            }
+        }
+
+        let html = '';
+        displayData.forEach(item => {
+            html += `
+                <div class="news-item" onclick="window.location.href='news-detail.html?id=${item.id}'">
+                    <span class="news-date">${this.formatDate(item.date)}</span>
+                    <h3 class="news-title">${item.title}</h3>
+                    <p class="news-summary">${item.summary}</p>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    async loadArticle() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+
+        if (!id) {
+            this.showError('Article ID not found.');
+            return;
+        }
+
+        const newsData = await this.fetchNewsData();
+        const article = newsData.find(item => item.id === id);
+
+        if (!article) {
+            this.showError('Article not found.');
+            return;
+        }
+
+        // Update page title and breadcrumb
+        document.title = `${article.title} - sota411 Portfolio`;
+        if (this.breadcrumbTitle) {
+            this.breadcrumbTitle.textContent = article.title;
+        }
+
+        try {
+            const response = await fetch(`news/${article.file}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch article content');
+            }
+            const markdown = await response.text();
+            this.renderArticle(article, markdown);
+        } catch (error) {
+            console.error('Error fetching article content:', error);
+            this.showError('Failed to load article content.');
+        }
+    }
+
+    renderArticle(meta, markdown) {
+        // Remove Front Matter
+        let content = markdown.replace(/^---[\s\S]*?---\n/, '');
+
+        // Remove the first H1 if it matches the title (or just the first H1 generally)
+        // Since we render the title in the header, we don't need it in the body.
+        content = content.replace(/^#\s+.*$/m, '');
+
+        // Simple Markdown Parser
+        const htmlContent = this.parseMarkdown(content);
+
+        const html = `
+            <div class="article-header">
+                <h1 class="article-title">${meta.title}</h1>
+                <span class="article-date">${this.formatDate(meta.date)}</span>
+            </div>
+            <div class="article-content">
+                ${htmlContent}
+            </div>
+        `;
+
+        this.newsArticle.innerHTML = html;
+    }
+
+    parseMarkdown(markdown) {
+        let html = markdown;
+
+        // Pre-process: Ensure block elements start on new lines to avoid being trapped in paragraphs
+        // Add a newline before headers, lists, blockquotes, and code blocks if they don't have one
+        html = html.replace(/^([#\*\->`])/gm, '\n$1');
+
+        // 1. Headers
+        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+        html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+        // 2. Bold
+        html = html.replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>');
+
+        // 3. Italic
+        html = html.replace(/\*(.*)\*/gim, '<em>$1</em>');
+
+        // 4. Code Blocks
+        html = html.replace(/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>');
+
+        // 5. Inline Code
+        html = html.replace(/`([^`]+)`/gim, '<code>$1</code>');
+
+        // 6. Blockquotes
+        html = html.replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>');
+
+        // 7. Lists (Unordered) - Support both * and -
+        html = html.replace(/^[\*\-] (.*$)/gim, '<ul><li>$1</li></ul>');
+
+        // 8. Links
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+        // 9. Paragraphs
+        // Split by double newlines
+        const paragraphs = html.split(/\n\s*\n/);
+        html = paragraphs.map(p => {
+            p = p.trim();
+            if (!p) return '';
+            // If it starts with a tag, don't wrap in <p> (simplified check)
+            // Now checking for h1-h6 as well
+            if (p.match(/^<(h[1-6]|ul|pre|blockquote)/i)) {
+                return p;
+            }
+            return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+        }).join('\n');
+
+        // Fix adjacent lists (merge them) - Do this AFTER paragraph splitting to catch all lists
+        html = html.replace(/<\/ul>\s*<ul>/gim, '');
+
+        // Cleanup empty paragraphs or paragraphs wrapping block elements if any
+        html = html.replace(/<p><(ul|h|pre|blockquote)/g, '<$1');
+        html = html.replace(/<\/(ul|h|pre|blockquote)><\/p>/g, '</$1>');
+
+        return html;
+    }
+
+    formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    showError(message) {
+        this.newsArticle.innerHTML = `
+            <div class="error-state">
+                <i class="fas fa-exclamation-circle"></i>
+                <p>${message}</p>
+                <a href="news.html" class="cta-secondary">Back to News List</a>
+            </div>
+        `;
+    }
+}
+
+// Initialize News Manager
+document.addEventListener('DOMContentLoaded', () => {
+    new NewsManager();
 });
