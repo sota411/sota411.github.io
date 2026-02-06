@@ -3431,16 +3431,6 @@ footer {
     transition: color 0.3s ease;
 }
 
-/* 画像の遅延読み込み */
-img[data-src] {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-img[data-src][src] {
-    opacity: 1;
-}
-
 /* 画像プレースホルダー */
 .image-placeholder {
     background: linear-gradient(110deg, #2d2d2d 8%, #353535 18%, #2d2d2d 33%);

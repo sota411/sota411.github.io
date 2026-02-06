@@ -98,18 +98,56 @@ filterBtns.forEach(btn => {
 // スクロールアニメーション
 function animateOnScroll() {
     sections.forEach(section => {
-        if (!section.classList.contains('fade-in')) {
-            section.classList.add('fade-in');
-        }
-        
+        if (section.classList.contains('active')) return;
         const sectionTop = section.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
-        
+
         if (sectionTop < windowHeight * 0.85) {
             section.classList.add('active');
         }
     });
 }
+
+function createRafThrottled(handler) {
+    let ticking = false;
+    return (...args) => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            handler(...args);
+            ticking = false;
+        });
+    };
+}
+
+function initSectionAnimations() {
+    sections.forEach(section => {
+        section.classList.add('fade-in');
+    });
+
+    if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            });
+        }, {
+            rootMargin: '0px 0px -15% 0px',
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+        return;
+    }
+
+    const throttledAnimateOnScroll = createRafThrottled(animateOnScroll);
+    window.addEventListener('scroll', throttledAnimateOnScroll, { passive: true });
+    animateOnScroll();
+}
+
 
 // ページ読み込み時のアニメーション初期化
 window.addEventListener('load', () => {
@@ -132,8 +170,6 @@ window.addEventListener('load', () => {
         }, 500);
     });
     
-    animateOnScroll();
-    
     // インターンシップセクションのアニメーション
     const internshipCard = document.querySelector('.internship-card');
     if (internshipCard) {
@@ -145,34 +181,10 @@ window.addEventListener('load', () => {
         }, 300);
     }
     
-    // 画像の遅延読み込み設定
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.getAttribute('data-src');
-                    img.removeAttribute('data-src');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        
-        lazyImages.forEach(img => {
-            imageObserver.observe(img);
-        });
-    } else {
-        // IntersectionObserverがサポートされていないブラウザ用のフォールバック
-        lazyImages.forEach(img => {
-            img.src = img.getAttribute('data-src');
-            img.removeAttribute('data-src');
-        });
-    }
 });
 
-// スクロール時のアニメーション実行
-window.addEventListener('scroll', animateOnScroll);
+// 初期化時にオフスクリーン要素監視を開始
+initSectionAnimations();
 
 // ヒーローセクションのタイピングエフェクト（オプション）
 const heroTitle = document.querySelector('.hero h1');
@@ -258,16 +270,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 preloader.classList.add('hidden');
             }
         }, 100); // 500msから100msに短縮
-    });
-
-    // AOS（Animate On Scroll）の初期化
-    AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: false,
-        mirror: false,
-        disable: window.innerWidth < 768 ? 'phone' : false, // モバイルでは無効化（任意）
-        offset: 50
     });
 
     // tsParticles の初期化
@@ -366,30 +368,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // スティッキーナビゲーション & スクロールスパイの実装
-    let lastScrollTop = 0;
-    const sections = document.querySelectorAll('main section'); // メインセクションを全て選択
-    window.addEventListener('scroll', () => {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const mainSections = document.querySelectorAll('main section');
+    let sectionMetrics = [];
 
-        // スクロール時のナビバー背景変更
-        if (scrollTop > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
+    const updateSectionMetrics = () => {
+        const navHeight = nav ? nav.offsetHeight : 0;
+        sectionMetrics = Array.from(mainSections).map(section => {
+            const top = section.offsetTop - navHeight - 100;
+            return {
+                id: section.getAttribute('id'),
+                top,
+                bottom: top + section.offsetHeight
+            };
+        });
+    };
+
+    const updateNavByScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (nav) {
+            if (scrollTop > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         }
 
-        // スクロールスパイ: アクティブなナビリンクをハイライト
         let currentSection = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - nav.offsetHeight - 100; // オフセットを調整
-            const sectionHeight = section.offsetHeight;
-            if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
-                currentSection = section.getAttribute('id');
+        for (const metric of sectionMetrics) {
+            if (scrollTop >= metric.top && scrollTop < metric.bottom) {
+                currentSection = metric.id;
+                break;
             }
-        });
+        }
 
-        // セクションがアクティブでない場合（例：トップやボトムでセクション範囲外）、ホームをデフォルトに
-        if (!currentSection && scrollTop < sections[0].offsetTop - nav.offsetHeight - 100) {
+        if (!currentSection && sectionMetrics.length > 0 && scrollTop < sectionMetrics[0].top) {
             currentSection = 'home';
         }
 
@@ -400,9 +413,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
             }
         });
+    };
 
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // モバイルやネガティブスクロール用
-    });
+    const throttledUpdateNavByScroll = createRafThrottled(updateNavByScroll);
+    const throttledUpdateSectionMetrics = createRafThrottled(updateSectionMetrics);
+    window.addEventListener('scroll', throttledUpdateNavByScroll, { passive: true });
+    window.addEventListener('resize', throttledUpdateSectionMetrics, { passive: true });
+    window.addEventListener('load', updateSectionMetrics);
+
+    updateSectionMetrics();
+    updateNavByScroll();
 
     // アンカーリンク用のスムーズスクロール
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

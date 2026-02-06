@@ -29,6 +29,9 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -86,7 +89,7 @@
                     <div class="about-image" data-aos="fade-right" data-aos-delay="100">
                         <div class="image-container">
                             <!-- 画像の遅延読み込みを実装 -->
-                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/profile.jpg" alt="Profile Image" loading="lazy">
+                            <img src="img/profile.jpg" alt="Profile Image" loading="lazy" decoding="async">
                         </div>
                     </div>
                     <div class="about-text" data-aos="fade-left" data-aos-delay="200">
@@ -355,7 +358,7 @@
                     <div class="internship-card" data-aos="zoom-in" data-aos-delay="200">
                         <div class="internship-header">
                             <div class="company-logo" style="width: 80px; height: 80px; background-color: #fff; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 5px; border: 1px solid #333;">
-                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/qia.png" alt="qia Co., Ltd. Logo" style="max-width: 90%; max-height: 90%; object-fit: contain;" loading="lazy">
+                                <img src="img/qia.png" alt="qia Co., Ltd. Logo" style="max-width: 90%; max-height: 90%; object-fit: contain;" loading="lazy" decoding="async">
                             </div>
                             <div class="company-info">
                                 <h3>qia株式会社</h3>
@@ -557,7 +560,7 @@
                 <div class="projects-grid">
                     <div class="project-card" data-category="web" data-aos="fade-up" data-aos-delay="200">
                         <div class="project-img">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/Project1.png" alt="Project 1" loading="lazy">
+                            <img src="img/Project1.png" alt="Project 1" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <h3>P&D 軽減率bot</h3>
@@ -575,7 +578,7 @@
                     </div>
                     <div class="project-card" data-category="design" data-aos="fade-up" data-aos-delay="300">
                         <div class="project-img">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/project2.jpg" alt="Project 3" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                            <img src="img/project2.jpg" alt="Project 3" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <h3>Valorant DB</h3>
@@ -593,7 +596,7 @@
                     </div>
                     <div class="project-card" data-category="web" data-aos="fade-up" data-aos-delay="400">
                         <div class="project-img">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="img/project3.jpg" alt="Project 4" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+                            <img src="img/project3.jpg" alt="Project 4" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
                         </div>
                         <div class="project-content">
                             <h3>MAC Address Changer</h3>
@@ -703,11 +706,11 @@
     </footer>
 
     <!-- tsParticles ライブラリ -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js" defer></script>
     <!-- AOS（Animate On Scroll）ライブラリ -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="js/liquid-glass.js"></script>
-    <script src="js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="js/liquid-glass.js" defer></script>
+    <script src="js/script.js" defer></script>
 </body>
 </html><!-- Last updated: 2025-06-16 23:13:51 UTC -->
 <!-- Last updated: 2025-07-01 23:13:58 UTC -->
