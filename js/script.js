@@ -465,6 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Modern Activity Dashboard Manager
 class ModernActivityDashboard {
     constructor() {
+        this.activitiesSection = document.getElementById('activities');
         this.summaryElement = document.getElementById('summaryContent');
         this.lastUpdatedElement = document.getElementById('lastUpdated');
         this.tweetCountElement = document.getElementById('tweetCount');
@@ -521,9 +522,14 @@ class ModernActivityDashboard {
     }
 
     updateUI(data) {
+        const isEmptyActivity = this.isEmptyActivityData(data);
+        this.setActivityEmptyState(isEmptyActivity);
+
         // Summary content update with modern styling
         if (this.summaryElement) {
-            this.summaryElement.innerHTML = this.formatModernSummary(data.summary);
+            this.summaryElement.innerHTML = isEmptyActivity
+                ? this.formatEmptyActivitySummary()
+                : this.formatModernSummary(data.summary);
             this.summaryElement.classList.add('updated');
             
             setTimeout(() => {
@@ -546,12 +552,39 @@ class ModernActivityDashboard {
         // Generate modern insights
         if (data.mood || data.technologies || data.achievements || data.focus_area) {
             this.generateInsights(data);
+        } else if (this.insightsGrid) {
+            this.insightsGrid.innerHTML = '';
         }
 
         // Create activity timeline
         if (data.highlights && data.highlights.length > 0) {
             this.createTimeline(data.highlights);
+        } else if (this.activityTimeline) {
+            this.activityTimeline.innerHTML = '';
         }
+    }
+
+    isEmptyActivityData(data) {
+        const hasStats = typeof data.stats === 'object' && data.stats !== null;
+        const hasNoTweets = hasStats && data.stats.tweetCount === 0;
+        const hasNoHighlights = Array.isArray(data.highlights) && data.highlights.length === 0;
+        const hasNoTopics = Array.isArray(data.topics) && data.topics.length === 0;
+        return hasNoTweets && hasNoHighlights && hasNoTopics;
+    }
+
+    setActivityEmptyState(isEmpty) {
+        if (!this.activitiesSection) return;
+        this.activitiesSection.classList.toggle('is-empty-activity', isEmpty);
+    }
+
+    formatEmptyActivitySummary() {
+        return `
+            <div class="empty-activity-state">
+                <h4>No Recent Posts</h4>
+                <p>No tweets were found in the last 15 days.</p>
+                <p class="empty-activity-note">The dashboard will expand automatically after new posts are analyzed.</p>
+            </div>
+        `;
     }
 
     formatModernSummary(summary) {
@@ -851,6 +884,8 @@ class ModernActivityDashboard {
     }
 
     showError() {
+        this.setActivityEmptyState(false);
+
         if (this.summaryElement) {
             this.summaryElement.innerHTML = `
                 <p class="error-message">
@@ -868,6 +903,14 @@ class ModernActivityDashboard {
         [this.tweetCountElement, this.topicCountElement, this.engagementRateElement].forEach(el => {
             if (el) el.textContent = '--';
         });
+
+        if (this.insightsGrid) {
+            this.insightsGrid.innerHTML = '';
+        }
+
+        if (this.activityTimeline) {
+            this.activityTimeline.innerHTML = '';
+        }
     }
 }
 
