@@ -1,38 +1,8 @@
 [
   {
-    "slug": "portfolio-performance-notes",
-    "title": "Portfolio Performance Notes",
-    "date": "2026-02-06",
-    "summary": "ポートフォリオの体感速度を改善するために、スクロール処理と画像読み込みを見直した記録です。"
-  },
-  {
-    "slug": "internship-infra-lessons",
-    "title": "Internship Infrastructure Lessons",
-    "date": "2026-02-06",
-    "summary": "インターンで実施したデプロイや運用改善を通じて得た、インフラ設計上の学びを整理しました。"
-  },
-  {
-    "slug": "dummy-article-01",
-    "title": "Dummy Article 01",
-    "date": "2026-02-12",
-    "summary": "一覧表示テスト用のダミー記事です。カード表示と遷移の確認に利用します。"
-  },
-  {
-    "slug": "dummy-article-02",
-    "title": "Dummy Article 02",
-    "date": "2026-02-11",
-    "summary": "記事一覧ページのレイアウト検証用に追加したサンプル記事です。"
-  },
-  {
-    "slug": "dummy-article-03",
-    "title": "Dummy Article 03",
-    "date": "2026-02-10",
-    "summary": "記事セクションの導線確認を目的としたダミーコンテンツです。"
-  },
-  {
-    "slug": "dummy-article-04",
-    "title": "Dummy Article 04",
-    "date": "2026-02-09",
-    "summary": "直近3件表示ロジックの確認用として追加したダミー記事です。"
+    "slug": "article-1",
+    "title": "応用情報技術者試験に合格しました",
+    "date": "2025-12-25",
+    "summary": "応用情報技術者試験の学習法と当日の振り返りをまとめました"
   }
 ]

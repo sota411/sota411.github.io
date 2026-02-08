@@ -32,12 +32,16 @@
 npm run add-article
 ```
 
-CLIで次を順番に入力します。
+CLIで `action` に `1`（追加）を入力し、次を順番に入力します。
 
-- `slug`
-- `title`
-- `date (YYYY-MM-DD)`
-- `summary`
+- `slug`（英小文字・数字・ハイフンのみ）
+  - 例: `applied-information-pass-2025`
+- `title`（記事タイトル）
+  - 例: `応用情報技術者試験に合格しました`
+- `date (YYYY-MM-DD)`（公開日）
+  - 例: `2025-12-25`
+- `summary`（記事カードに表示する要約）
+  - 例: `応用情報技術者試験の学習法と当日の振り返りをまとめました。`
 
 確定後に自動で次を実行します。
 
@@ -58,29 +62,33 @@ CLIで次を順番に入力します。
 npm run build-articles
 ```
 
-## 3. 記事を削除する
+## 3. 記事を削除する（対話CLI）
 
-1. `articles/index.json` から対象エントリを削除します。
-2. 対象の Markdown を削除します。
-
-```bash
-rm articles/<slug>.md
-```
-
-3. ビルドを実行します。
+次のコマンドを実行します。
 
 ```bash
-npm run build-articles
+npm run add-article
 ```
 
-4. 不要な生成物を削除します。  
-`build-articles` は古い `data/articles/<slug>.json` を自動削除しません。
+CLIで `action` に `2`（削除）を入力し、対象記事の `番号` または `slug` を指定します。
+CLIは次を自動実行します。
+
+- `articles/<slug>.md` の削除
+- `articles/index.json` から対象エントリを削除
+- `data/articles/<slug>.json` があれば削除
+- `npm run build-articles` を実行
+
+## 4. 記事一覧を確認する（対話CLI）
+
+次のコマンドを実行し、`action` に `3`（一覧表示）を入力します。
 
 ```bash
-rm data/articles/<slug>.json
+npm run add-article
 ```
 
-## 4. 反映確認
+`slug | date | title` 形式で現在の記事一覧が表示されます。
+
+## 5. 反映確認
 
 - `data/articles/index.json` に期待する内容が出力されている
 - `data/articles/<slug>.json` が生成または更新されている
@@ -89,7 +97,7 @@ rm data/articles/<slug>.json
 
 ## トラブルシュート
 
-1. `Failed to add article` が出る場合  
+1. `Failed to manage article` が出る場合  
 `slug` 形式、`date` 形式、重複 `slug`、既存 Markdown 衝突を確認する。
 2. `Failed to build articles` が出る場合  
 `articles/index.json` の必須項目不足や日付形式、`source` で指定した Markdown ファイルの存在を確認する。

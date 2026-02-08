@@ -2,7 +2,7 @@
 
 ## 記事運用（Markdown）
 
-1. `npm run add-article` を実行し、対話形式で記事を追加します。
+1. `npm run add-article` を実行し、`action` を選びます（`1:追加 / 2:削除 / 3:一覧表示`）。
 2. 作成された `articles/*.md` に本文を書きます。
 3. 本文やメタ情報を更新した場合は `npm run build-articles` を実行します。
 
