@@ -1557,36 +1557,53 @@ footer {
     .nav-container {
         padding: 15px 20px;
     }
+
+    .nav-container nav[data-aos],
+    .nav-container nav.aos-init,
+    .nav-container nav.aos-animate {
+        transform: none !important;
+        opacity: 1 !important;
+    }
     
     .nav-links {
         position: fixed;
-        background-color: rgba(18, 18, 18, 0.95);
-        height: 100vh;
-        width: 100%;
+        background-color: rgba(0, 0, 0, 0.98);
+        height: 100dvh;
+        width: min(84vw, 340px);
         top: 0;
         right: 0;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        transition: transform 0.5s ease-in;
-        z-index: 999;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 88px 20px 24px;
+        transform: translateX(105%);
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: 1200;
+        border-left: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: -24px 0 48px rgba(0, 0, 0, 0.55);
     }
     
     .nav-links.active {
-        transform: translateX(0%);
+        transform: translateX(0);
     }
     
     .nav-links li {
-        margin: 15px 0;
+        margin: 6px 0;
         opacity: 0;
-        transform: translateX(24px); /* 非表示時の位置 */
-        transition: opacity 0.5s ease, transform 0.5s ease; /* アニメーションの定義 */
+        transform: translateX(16px);
+        transition: opacity 0.26s ease, transform 0.26s ease;
     }
 
     .nav-links.active li {
-        opacity: 1; /* 表示時の透明度 */
-        transform: translateX(0); /* 表示時の位置 */
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .nav-links a {
+        display: block;
+        font-size: 1rem;
+        line-height: 1.4;
+        padding: 8px 4px;
     }
 
     /* ナビゲーションリンクのアニメーション遅延 */
@@ -1621,6 +1638,8 @@ footer {
     .burger {
         display: block;
         cursor: pointer;
+        position: relative;
+        z-index: 1300;
     }
     
     .toggle .line1 {
@@ -1637,6 +1656,10 @@ footer {
     
     .projects-grid, .skills-grid {
         grid-template-columns: 1fr;
+    }
+
+    body.menu-open {
+        overflow: hidden;
     }
     
     .hero h1 {

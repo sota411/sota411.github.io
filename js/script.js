@@ -219,34 +219,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeMobileMenu() {
         navMenu.classList.remove('active');
         burger.classList.remove('toggle');
-        document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
     }
 
     // ハンバーガーメニューの処理（統合版）
     if (burger && navMenu) {
         burger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            burger.classList.toggle('toggle');
-            
-            // ボディのスクロールを制御
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-            
-            // リンクのアニメーション
-            const menuItems = navMenu.querySelectorAll('li');
-            menuItems.forEach((item, index) => {
-                item.style.animation = '';
-                setTimeout(() => {
-                    if (navMenu.classList.contains('active')) {
-                        item.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-                    } else {
-                        item.style.animation = '';
-                    }
-                }, 10);
-            });
+            const isOpen = navMenu.classList.toggle('active');
+            burger.classList.toggle('toggle', isOpen);
+            document.body.classList.toggle('menu-open', isOpen);
         });
 
         // メニューリンククリック時の処理
@@ -261,6 +242,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // リサイズ時の処理
         window.addEventListener('resize', () => {
             if (window.innerWidth >= MOBILE_MENU_BREAKPOINT) {
+                closeMobileMenu();
+            }
+        });
+
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && navMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
         });
@@ -446,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (navMenu.classList.contains('active')) {
                     navMenu.classList.remove('active');
                     burger.classList.remove('toggle');
-                    document.body.style.overflow = '';
+                    document.body.classList.remove('menu-open');
                 }
             }
         });
