@@ -1,6 +1,6 @@
 // Liquid Glass Effect Application Script
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     // Add the SVG filter for glass distortion if it doesn't exist
     function addGlassFilter() {
         if (document.getElementById('glass-distortion')) {
@@ -104,43 +104,35 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
     
-    // Initialize glass filter
-    addGlassFilter();
-    
-    // Skip header navigation - keep original styling
-
     // Apply liquid glass to different card types (excluding contact-item)
-    const selectors = [
+    const defaultSelectors = [
         '.certification-item',
-        '.skill-item', 
+        '.skill-item',
         '.project-card',
         '.dashboard-card',
         '.stat-card',
         '.section-description-card',
         '.insight-card',
-        '.internship-card'
+        '.internship-card',
+        '.article-card'
     ];
-    
-    selectors.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        elements.forEach(element => {
-            // Only apply if element doesn't already have liquid glass structure
-            if (!element.querySelector('.liquidGlass-effect')) {
-                applyLiquidGlass(element);
-            }
+
+    function applyLiquidGlassEffects(selectors = defaultSelectors) {
+        const targetSelectors = Array.isArray(selectors) ? selectors : [selectors];
+        targetSelectors.forEach((selector) => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach((element) => {
+                if (!element.querySelector('.liquidGlass-effect')) {
+                    applyLiquidGlass(element);
+                }
+            });
         });
-    });
-    
-    // Note: internship-card is now handled in the main selectors loop above
-    
-    console.log('Liquid glass effects applied to portfolio cards');
-    
-    // Debug: Log which elements were found and processed
-    selectors.forEach(selector => {
-        const elements = document.querySelectorAll(selector);
-        console.log(`Found ${elements.length} elements for selector: ${selector}`);
-        elements.forEach((element, index) => {
-            console.log(`  - Element ${index + 1}:`, element.classList.toString());
-        });
-    });
+    }
+
+    // Initialize glass filter and apply once on initial DOM
+    addGlassFilter();
+    applyLiquidGlassEffects();
+
+    // Expose hook for dynamically rendered cards (e.g. articles loaded via fetch)
+    window.applyLiquidGlassEffects = applyLiquidGlassEffects;
 });

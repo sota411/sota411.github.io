@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "portfolio-performance-notes",
+    "title": "Portfolio Performance Notes",
+    "date": "2026-02-06",
+    "summary": "ポートフォリオの体感速度を改善するために、スクロール処理と画像読み込みを見直した記録です。"
+  },
+  {
+    "slug": "internship-infra-lessons",
+    "title": "Internship Infrastructure Lessons",
+    "date": "2026-02-06",
+    "summary": "インターンで実施したデプロイや運用改善を通じて得た、インフラ設計上の学びを整理しました。"
+  }
+]
