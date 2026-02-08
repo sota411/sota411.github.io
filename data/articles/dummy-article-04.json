@@ -1,0 +1,13 @@
+{
+  "slug": "dummy-article-04",
+  "title": "Dummy Article 04",
+  "date": "2026-02-09",
+  "summary": "直近3件表示ロジックの確認用として追加したダミー記事です。",
+  "html": "<h1>Dummy Article 04</h1>\n<p>UI確認のために追加したダミー記事です。本文体裁と見出し表示の確認に使用します。</p>\n<h2>確認ポイント</h2>\n<ul>\n<li>詳細ページの本文タイポグラフィ</li>\n<li>目次リンクの動作</li>\n<li>Back to Articlesの遷移先</li>\n</ul>\n",
+  "headings": [
+    {
+      "depth": 2,
+      "text": "確認ポイント"
+    }
+  ]
+}

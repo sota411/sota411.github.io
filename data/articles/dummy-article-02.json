@@ -1,0 +1,13 @@
+{
+  "slug": "dummy-article-02",
+  "title": "Dummy Article 02",
+  "date": "2026-02-11",
+  "summary": "記事一覧ページのレイアウト検証用に追加したサンプル記事です。",
+  "html": "<h1>Dummy Article 02</h1>\n<p>Articles一覧の導線検証用に追加したサンプル記事です。</p>\n<h2>確認ポイント</h2>\n<ul>\n<li>ナビゲーションからの記事一覧遷移</li>\n<li>記事カードクリック時の詳細遷移</li>\n<li>戻るリンクの導線</li>\n</ul>\n",
+  "headings": [
+    {
+      "depth": 2,
+      "text": "確認ポイント"
+    }
+  ]
+}

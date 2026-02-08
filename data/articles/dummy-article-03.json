@@ -1,0 +1,13 @@
+{
+  "slug": "dummy-article-03",
+  "title": "Dummy Article 03",
+  "date": "2026-02-10",
+  "summary": "記事セクションの導線確認を目的としたダミーコンテンツです。",
+  "html": "<h1>Dummy Article 03</h1>\n<p>直近3件表示の挙動を確認するためのダミー記事です。</p>\n<h2>確認ポイント</h2>\n<ul>\n<li>Homeでの表示順位</li>\n<li>date降順の並び替え</li>\n<li>一覧ページとの表示差分</li>\n</ul>\n",
+  "headings": [
+    {
+      "depth": 2,
+      "text": "確認ポイント"
+    }
+  ]
+}

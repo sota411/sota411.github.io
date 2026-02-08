@@ -16,6 +16,10 @@ function createArticleCard(article, index) {
                 <div class="article-card-meta">${formatArticleDate(article.date)}</div>
                 <h3>${article.title}</h3>
                 <p>${article.summary}</p>
+                <div class="article-card-readmore">
+                    Read article
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </div>
             </article>
         </a>
     `;
@@ -33,30 +37,70 @@ async function loadArticleIndex() {
     return data;
 }
 
+function parseArticleTimestamp(article) {
+    const timestamp = Date.parse(article.date);
+    if (Number.isNaN(timestamp)) {
+        throw new Error(`Invalid article date: ${article.date}`);
+    }
+    return timestamp;
+}
+
+function sortArticlesByDateDesc(articles) {
+    return [...articles].sort((a, b) => parseArticleTimestamp(b) - parseArticleTimestamp(a));
+}
+
+function resolveArticleLimit(gridElement) {
+    const rawLimit = gridElement.dataset.limit;
+    if (!rawLimit) return null;
+
+    const limit = Number.parseInt(rawLimit, 10);
+    if (Number.isNaN(limit) || limit < 0) {
+        throw new Error(`Invalid articles limit: ${rawLimit}`);
+    }
+
+    return limit;
+}
+
+function updateAosState() {
+    if (typeof AOS === 'undefined') return;
+
+    const isInitialized = document.documentElement.classList.contains('aos-initialized');
+    if (!isInitialized) {
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+        return;
+    }
+
+    if (typeof AOS.refreshHard === 'function') {
+        AOS.refreshHard();
+    } else {
+        AOS.refresh();
+    }
+}
+
 async function renderArticleList() {
     const grid = document.getElementById('articlesGrid');
     if (!grid) return;
 
     try {
-        const articles = await loadArticleIndex();
+        const articles = sortArticlesByDateDesc(await loadArticleIndex());
         if (articles.length === 0) {
             grid.innerHTML = '<p class="article-empty-state">No articles published yet.</p>';
             return;
         }
 
-        grid.innerHTML = articles.map((article, index) => createArticleCard(article, index)).join('');
+        const limit = resolveArticleLimit(grid);
+        const displayedArticles = limit === null ? articles : articles.slice(0, limit);
+        grid.innerHTML = displayedArticles.map((article, index) => createArticleCard(article, index)).join('');
 
         if (typeof window.applyLiquidGlassEffects === 'function') {
             window.applyLiquidGlassEffects(['.article-card']);
         }
 
-        if (typeof AOS !== 'undefined') {
-            if (typeof AOS.refreshHard === 'function') {
-                AOS.refreshHard();
-            } else {
-                AOS.refresh();
-            }
-        }
+        updateAosState();
     } catch (error) {
         console.error(error);
         grid.innerHTML = '<p class="article-empty-state">Failed to load articles.</p>';
@@ -129,14 +173,7 @@ async function renderArticleDetail() {
         removeDuplicatedTopHeading(contentElement, article.title);
         document.title = `${article.title} | sota411`;
         renderArticleToc(contentElement, tocElement);
-
-        if (typeof AOS !== 'undefined') {
-            AOS.init({
-                duration: 800,
-                once: true,
-                offset: 100
-            });
-        }
+        updateAosState();
     } catch (error) {
         console.error(error);
         titleElement.textContent = 'Article Not Found';

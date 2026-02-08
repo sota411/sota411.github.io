@@ -205,6 +205,7 @@ if (heroTitle && heroText && false) { // デフォルトで無効、有効にす
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const MOBILE_MENU_BREAKPOINT = 768;
     const nav = document.querySelector('.nav-container');
     const navMenuLinks = document.querySelectorAll('.nav-links li');
     const burger = document.querySelector('.burger');
@@ -214,6 +215,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectGrid = document.querySelector('.projects-grid');
     const projectCards = document.querySelectorAll('.project-card');
     const preloader = document.getElementById('preloader');
+
+    function closeMobileMenu() {
+        navMenu.classList.remove('active');
+        burger.classList.remove('toggle');
+        document.body.style.overflow = '';
+    }
 
     // ハンバーガーメニューの処理（統合版）
     if (burger && navMenu) {
@@ -246,19 +253,15 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 if (navMenu.classList.contains('active')) {
-                    navMenu.classList.remove('active');
-                    burger.classList.remove('toggle');
-                    document.body.style.overflow = '';
+                    closeMobileMenu();
                 }
             });
         });
 
         // リサイズ時の処理
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                burger.classList.remove('toggle');
-                document.body.style.overflow = '';
+            if (window.innerWidth >= MOBILE_MENU_BREAKPOINT) {
+                closeMobileMenu();
             }
         });
     }
