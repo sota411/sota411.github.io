@@ -81,6 +81,119 @@ function updateAosState() {
     }
 }
 
+let tocObserver = null;
+let tocScrollHandler = null;
+let tocHashHandler = null;
+
+function cleanupTocTracking() {
+    if (tocObserver) {
+        tocObserver.disconnect();
+        tocObserver = null;
+    }
+    if (tocScrollHandler) {
+        window.removeEventListener('scroll', tocScrollHandler);
+        tocScrollHandler = null;
+    }
+    if (tocHashHandler) {
+        window.removeEventListener('hashchange', tocHashHandler);
+        tocHashHandler = null;
+    }
+}
+
+function createHeadingId(text, index, usedIds) {
+    const base = text
+        .trim()
+        .toLowerCase()
+        .replace(/<[^>]+>/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-ぁ-んァ-ン一-龠]/g, '')
+        .replace(/\-+/g, '-')
+        .replace(/^\-|\-$/g, '');
+
+    const fallback = `section-${index + 1}`;
+    const seed = base.length > 0 ? base : fallback;
+    let candidate = seed;
+    let suffix = 2;
+
+    while (usedIds.has(candidate)) {
+        candidate = `${seed}-${suffix}`;
+        suffix += 1;
+    }
+
+    usedIds.add(candidate);
+    return candidate;
+}
+
+function setActiveTocLink(tocElement, headingId) {
+    if (!tocElement) return;
+    const links = tocElement.querySelectorAll('a');
+    links.forEach((link) => {
+        const isActive = link.getAttribute('href') === `#${headingId}`;
+        link.classList.toggle('is-active', isActive);
+    });
+}
+
+function getCurrentHeadingId(headings, thresholdTop = 140) {
+    let current = headings[0]?.id || null;
+    headings.forEach((heading) => {
+        if (heading.getBoundingClientRect().top <= thresholdTop) {
+            current = heading.id;
+        }
+    });
+    return current;
+}
+
+function setupTocTracking(contentElement, tocElement) {
+    cleanupTocTracking();
+
+    if (!tocElement) return;
+    const headings = Array.from(contentElement.querySelectorAll('h2, h3'));
+    if (headings.length === 0) return;
+    const headingIds = new Set(headings.map((heading) => heading.id));
+
+    const syncActiveHeading = () => {
+        const hashId = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+        const isNearBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+        if (hashId && headingIds.has(hashId) && isNearBottom) {
+            setActiveTocLink(tocElement, hashId);
+            return;
+        }
+
+        const activeId = getCurrentHeadingId(headings);
+        if (activeId) {
+            setActiveTocLink(tocElement, activeId);
+        }
+    };
+
+    tocObserver = new IntersectionObserver((entries) => {
+        if (entries.length > 0) {
+            syncActiveHeading();
+        }
+    }, {
+        root: null,
+        rootMargin: '-120px 0px -62% 0px',
+        threshold: [0, 1]
+    });
+
+    headings.forEach((heading) => tocObserver.observe(heading));
+
+    tocScrollHandler = syncActiveHeading;
+    window.addEventListener('scroll', tocScrollHandler, { passive: true });
+    tocHashHandler = syncActiveHeading;
+    window.addEventListener('hashchange', tocHashHandler);
+
+    const hash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+    if (hash && headings.some((heading) => heading.id === hash)) {
+        setActiveTocLink(tocElement, hash);
+        return;
+    }
+
+    const initialId = getCurrentHeadingId(headings, 220);
+    if (initialId) {
+        setActiveTocLink(tocElement, initialId);
+    }
+}
+
 async function renderArticleList() {
     const grid = document.getElementById('articlesGrid');
     if (!grid) return;
@@ -117,10 +230,9 @@ function renderArticleToc(contentElement, tocElement) {
         return;
     }
 
+    const usedIds = new Set();
     headings.forEach((heading, index) => {
-        if (!heading.id) {
-            heading.id = `section-${index + 1}`;
-        }
+        heading.id = createHeadingId(heading.textContent, index, usedIds);
     });
 
     const tocItems = headings.map((heading) => `
@@ -133,6 +245,8 @@ function renderArticleToc(contentElement, tocElement) {
         <h3>Contents</h3>
         <ul>${tocItems}</ul>
     `;
+
+    setupTocTracking(contentElement, tocElement);
 }
 
 function removeDuplicatedTopHeading(contentElement, titleText) {
@@ -149,6 +263,7 @@ async function renderArticleDetail() {
     const tocElement = document.getElementById('articleToc');
 
     if (!titleElement || !dateElement || !contentElement) return;
+    cleanupTocTracking();
 
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
@@ -157,6 +272,10 @@ async function renderArticleDetail() {
         titleElement.textContent = 'Article Not Found';
         dateElement.textContent = '';
         contentElement.innerHTML = '<p class="article-empty-state">Missing article slug.</p>';
+        if (tocElement) {
+            tocElement.innerHTML = '';
+            tocElement.style.display = 'none';
+        }
         return;
     }
 
